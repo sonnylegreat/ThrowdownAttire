@@ -1,0 +1,43 @@
+﻿@model ThrowdownAttire.Models.Shirt
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="shirt">
+    <div class="row">
+        <div id="details" class="col-md-6">
+            <div>
+                <h2 id="shirt-header"class="page-header">@Model.Title</h2>
+                <h2 id="price">$@Model.Price.ToString("0.00")</h2>
+            </div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+                <li role="presentation"><a href="#measurements" aria-controls="measurements" role="tab" data-toggle="tab">Measurements</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="description">
+                    @Model.Description
+                </div>
+                <div role="tabpanel" class="tab-pane" id="measurements">
+                    Medium
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div id="owlCarousel">
+                <div class="item"><img src="~/Content/SliderImages/DrugsNotHugs.jpg" id="shirtpic" class="img-responsive" /></div>
+                <div class="item"><img src="~/Content/SliderImages/Ironlak.jpg" id="shirtpic" class="img-responsive" /></div>
+                <div class="item"><img src="~/Content/SliderImages/mdmaShirt.jpg" id="shirtpic" class="img-responsive" /></div>
+            </div>
+            <button type="button" id="buybutton" class="btn btn-default btn-lg">Buy</button>
+        </div>
+    </div>
+</div>
+
+
