@@ -13,9 +13,7 @@ fonts/
 *.ide/
 *.min.map
 *.js.map
-*.js
 *.resx
-*.json
 *.Designer.cs
 *.zip
 
