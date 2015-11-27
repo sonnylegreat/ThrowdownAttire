@@ -26,6 +26,10 @@ namespace ThrowdownAttire
                       "~/Scripts/main.js"
                       ));
 
+            bundles.Add(new ScriptBundle("~/bundles/series").Include(
+                      "~/Scripts/series.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/OwlCarousel/owl.carousel.css",
