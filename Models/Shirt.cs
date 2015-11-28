@@ -7,17 +7,11 @@ namespace ThrowdownAttire.Models
 {
     public partial class Shirt
     {
-        public enum ShirtType
-        {
-            Drugs,
-            Option2,
-            Lifestyle,
-            Fpp
-        }
-
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public String Title { get; set; }
+
+        public String Handle { get; set; }
 
         public String Photo { get; set; }
 
@@ -25,7 +19,7 @@ namespace ThrowdownAttire.Models
 
         public int Stock { get; set; }
 
-        public ShirtType Type { get; set; }
+        public string Type { get; set; }
 
         public String Description { get; set; }
     }

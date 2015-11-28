@@ -35,11 +35,11 @@
                 <div class="item"><img src="~/Content/SliderImages/Ironlak.jpg" id="shirtpic" class="img-responsive" /></div>
                 <div class="item"><img src="~/Content/SliderImages/mdmaShirt.jpg" id="shirtpic" class="img-responsive" /></div>
             </div>
-            <div id="buybutton" class="btn btn-default btn-lg" data-embed_type="product" data-shop="throwdown-attire.myshopify.com" data-product_name="Mdma Shirt" data-product_handle="mdma-shirt" data-has_image="false" data-display_size="compact" data-redirect_to="cart" data-buy_button_text="Add to cart" data-buy_button_out_of_stock_text="Out of Stock" data-buy_button_product_unavailable_text="Unavailable" data-button_background_color="5e81a8" data-button_text_color="ffffff" data-product_modal="false" data-product_title_color="000000" data-next_page_button_text="Next page"></div>
+            <div id="buybutton" class="btn btn-default btn-lg" data-embed_type="product" data-shop="throwdown-attire.myshopify.com" data-product_name="@Model.Title" data-product_handle="@Model.Handle" data-has_image="false" data-display_size="compact" data-redirect_to="cart" data-buy_button_text="Add to cart" data-buy_button_out_of_stock_text="Out of Stock" data-buy_button_product_unavailable_text="Unavailable" data-button_background_color="5e81a8" data-button_text_color="ffffff" data-product_modal="false" data-product_title_color="000000" data-next_page_button_text="Next page"></div>
             <script type="text/javascript">
 document.getElementById('ShopifyEmbedScript') || document.write('<script type="text/javascript" src="https://widgets.shopifyapps.com/assets/widgets/embed/client.js" id="ShopifyEmbedScript"><\/script>');
             </script>
-            <noscript><a href="https://throwdown-attire.myshopify.com/cart/11609628803:1" target="_blank">Buy Mdma Shirt</a></noscript>
+            <noscript><a href="https://throwdown-attire.myshopify.com/cart/@Model.Id:1" target="_blank">Buy @Model.Title Shirt</a></noscript>
         </div>
     </div>
 </div>
