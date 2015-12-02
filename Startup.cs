@@ -9,6 +9,7 @@ using System.Configuration;
 using System.IO;
 using Newtonsoft.Json;
 using ThrowdownAttire.App_Start;
+using Newtonsoft.Json.Linq;
 
 [assembly: OwinStartup(typeof(ThrowdownAttire.Startup))]
 
@@ -39,16 +40,26 @@ namespace ThrowdownAttire
 
             foreach (var product in json.products)
             {
+                var sizes = new Dictionary<string, string>();
+
+                foreach(var variant in product.variants)
+                {
+                    sizes.Add((string) variant.title, (string) variant.id);
+                }
+
+                var images = (JArray) product.images;
+
                 shirts.Add(new Models.Shirt()
                 {
                     Id = product.id,
                     Title = product.title,
-                    Description = product.html_body ?? product.title,
-                    Photo = product.images[0].src,
+                    Description = product.html_body ?? product.tags,
+                    Photos = (String[]) images.Values("src").Select(x => x.ToString()).ToArray(),
                     Handle = product.handle,
                     Price = product.variants[0].price,
                     Stock = product.variants[0].inventory_quantity,
-                    Type = product.tags
+                    Type = product.tags,
+                    Sizes = sizes
                 });
             }
 

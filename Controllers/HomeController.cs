@@ -5,6 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using ThrowdownAttire.Models;
 using ThrowdownAttire.App_Start;
+using System.Net;
+using System.Configuration;
+using System.IO;
+using System.Collections.Specialized;
+using System.Text;
 
 namespace ThrowdownAttire.Controllers
 {
@@ -28,6 +33,23 @@ namespace ThrowdownAttire.Controllers
         public ActionResult Shirt(string id)
         {
             return View(Globals.Shirts.FirstOrDefault(x => x.Id == id));
+        }
+
+        [HttpPost]
+        public ActionResult AddToCart(string quantity, string id)
+        {
+            var wc = new WebClient();
+            wc.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["APIKey"], ConfigurationManager.AppSettings["Password"]);
+
+            var response = wc.UploadValues("https://throwdown-attire.myshopify.com/admin/cart/add", new NameValueCollection()
+            {
+                {"quantity", quantity },
+                {"id", id }
+            });
+
+            var responseStr = Encoding.UTF8.GetString(response);
+
+            return new HttpStatusCodeResult(200);
         }
     }
 }

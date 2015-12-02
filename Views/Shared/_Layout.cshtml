@@ -19,15 +19,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" id="title" href="~/Home/Index">Throw Down Attire</a>
+                <a class="navbar-brand" id="title" href="/">Throw Down Attire</a>
             </div>
             <div class="navbar-collapse collapse" id="throwdown-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="series" value="all"><a href="~/Home/Series">All</a></li>
-                    <li class="series" value="drugs"><a href="~/Home/Series">Drugs</a></li>
-                    <li class="series" value="option2"><a href="~/Home/Series">Option-2</a></li>
-                    <li class="series" value="lifestyle"><a href="~/Home/Series">Lifestyle</a></li>
-                    <li class="series" value="fpp"><a href="~/Home/Series">Fuck Plain Packaging</a></li>
+                    <li class="series" value="all"><a href="~/series">All</a></li>
+                    <li class="series" value="drugs"><a href="~/series">Drugs</a></li>
+                    <li class="series" value="quote"><a href="~/series">Quote</a></li>
+                    <li class="series" value="lifestyle"><a href="~/series">Lifestyle</a></li>
+                    <li class="series" value="fpp"><a href="~/series">Fuck Plain Packaging</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="about.html">About</a></li>
@@ -42,7 +42,6 @@
     <script type="text/javascript">
 document.getElementById('ShopifyEmbedScript') || document.write('<script type="text/javascript" src="https://widgets.shopifyapps.com/assets/widgets/embed/client.js" id="ShopifyEmbedScript"><\/script>');
     </script>
-    @Scripts.Render("~/bundles/main")
     @RenderSection("scripts", required: false)
 </body>
 </html>

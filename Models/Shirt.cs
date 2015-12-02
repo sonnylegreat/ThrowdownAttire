@@ -13,7 +13,7 @@ namespace ThrowdownAttire.Models
 
         public String Handle { get; set; }
 
-        public String Photo { get; set; }
+        public String[] Photos { get; set; }
 
         public double Price { get; set; }
 
@@ -22,5 +22,7 @@ namespace ThrowdownAttire.Models
         public string Type { get; set; }
 
         public String Description { get; set; }
+
+        public Dictionary<string, string> Sizes { get; set; } // Dictionary of each size and its ID. 
     }
 }

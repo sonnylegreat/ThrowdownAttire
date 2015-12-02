@@ -1,53 +1,17 @@
 ﻿var currentType = null;
+var $seriesClone;
+var $shirtModals;
 
-function animateAppend($source, $target) {
-    var $dest = $source.clone().appendTo($target);
-    var destOffset = $dest.offset();
+function backToNormal() {
+    $("#series").remove();
+    $seriesClone.insertAfter("#navbar");
+    $seriesClone = $seriesClone.clone();
 
-    var sourceOffset = $source.offset();
-
-    var $temp = $source.clone().appendTo("body");
-
-    $temp.css("position", "absolute")
-    .css("left", sourceOffset.left)
-    .css("top", sourceOffset.top)
-    .css("z-index", 1000);
-
-    $dest.hide();
-    $source.hide();
-
-    $temp.animate({
-        "top": destOffset.top,
-        "left": destOffset.left
-    },
-    "slow",
-    function () {
-        $dest.show();
-        $source.remove();
-        $temp.remove();
+    $(".shirtContainer").each(function(index, element){
+        $(element).slideDown(1000);
     });
-}
 
-function backToNormal($shirtContainer) {
-    $shirtContainer.css("position", "relative");
-    $shirtContainer.show();
-
-    stealthBackToNormal($shirtContainer);
-}
-
-function stealthBackToNormal($shirtContainer) {
-    $shirtContainer.parent().each(function (index, element) {
-
-        var $element = $(element);
-        var length = $element.children().length;
-
-        if (length > 4) {
-            for (i = length; i > 4; i--) {
-                $($element.children().last()).
-                prependTo($element.next())
-            }
-        }
-    });
+    createListeners();
 }
 
 function show($type) {
@@ -56,47 +20,58 @@ function show($type) {
     }
     currentType = $type;
     var $shirtContainer = $(".shirtContainer");
-    if ($type == "all") {
-        backToNormal($shirtContainer);
+    if ($type === "all") {
+        backToNormal();
     }
     else {
-        stealthBackToNormal($shirtContainer);
-
-        var $currentParent = $shirtContainer.first().parent(); // the current row to be filled.
-        var emptyCount = 0; // The number of empty spaces in the current row.
+        var $lastShirt = null; // The last successfully matched shirt.
+        var siblingCount = 0;
 
         $shirtContainer.each(function (index, element) {
             var $element = $(element);
 
             if ($element.find(".shirtModal").data("type") != $type) {
-                $element.hide();
+                $element.slideUp("slow");
                 $element.css("position", "absolute");
-
-                if (index % 4 == 0) {
-                    emptyCount = 0;
-                    $currentParent = $element.parent();
-                }
-                emptyCount += 1;
             }
             else {
                 $element.css("position", "relative");
-                $element.show();
+                $element.slideDown("slow");
 
-                if ($currentParent[0] == $element.parent()[0]) {
-                    return;
+                var $dest;
+
+                if ($lastShirt != null && siblingCount < 3) {
+                    $element.insertAfter($lastShirt);
+                    siblingCount += 1;
                 }
-                if (emptyCount > 0) {
-                    animateAppend($element, $currentParent);
-                    emptyCount -= 1;
+                else {
+                    siblingCount = 0;
                 }
+
+                $lastShirt = $element;
             }
         });
     }
 }
+
+function createListeners() {
+    $(".modal-footer, .modal-header").css("visibility", "hidden");
+
+    $(".shirtModal").mouseenter(function () {
+        $(this).find(".modal-footer, .modal-header").css("visibility", "visible");
+    }).mouseleave(function (event) {
+        $(this).find(".modal-footer, .modal-header").css("visibility", "hidden");
+    });
+}
+
 $(document).ready(function () {
+    $seriesClone = $("#series").clone();
+
     $("li.series").click(function (event) {
         var $type = $(this).attr("value");
         show($type);
         event.preventDefault();
     });
+
+    createListeners();
 });

@@ -20,10 +20,9 @@ namespace ThrowdownAttire
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/main").Include(
-                      "~/Scripts/Easing/jquery.easing.1.3.js",
+            bundles.Add(new ScriptBundle("~/bundles/shirt").Include(
                       "~/Scripts/OwlCarousel/owl.carousel.js",
-                      "~/Scripts/main.js"
+                      "~/Scripts/shirt.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/series").Include(
