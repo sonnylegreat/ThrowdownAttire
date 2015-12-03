@@ -10,6 +10,8 @@ using System.IO;
 using Newtonsoft.Json;
 using ThrowdownAttire.App_Start;
 using Newtonsoft.Json.Linq;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 [assembly: OwinStartup(typeof(ThrowdownAttire.Startup))]
 
@@ -40,18 +42,18 @@ namespace ThrowdownAttire
 
             foreach (var product in json.products)
             {
-                var sizes = new Dictionary<string, string>();
+                var variants = new Dictionary<ObjectId, string>();
 
                 foreach(var variant in product.variants)
                 {
-                    sizes.Add((string) variant.title, (string) variant.id);
+                    variants.Add(ObjectId.GenerateNewId(), (string) variant.title);
                 }
 
                 var images = (JArray) product.images;
 
                 shirts.Add(new Models.Shirt()
                 {
-                    Id = product.id,
+                    Id = ObjectId.GenerateNewId(),
                     Title = product.title,
                     Description = product.html_body ?? product.tags,
                     Photos = (String[]) images.Values("src").Select(x => x.ToString()).ToArray(),
@@ -59,7 +61,7 @@ namespace ThrowdownAttire
                     Price = product.variants[0].price,
                     Stock = product.variants[0].inventory_quantity,
                     Type = product.tags,
-                    Sizes = sizes
+                    Variants = variants
                 });
             }
 
