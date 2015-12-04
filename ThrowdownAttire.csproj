@@ -250,10 +250,42 @@
     <Content Include="Content\OwlCarousel\owl.carousel.css" />
     <Content Include="Content\OwlCarousel\owl.theme.css" />
     <Content Include="Content\OwlCarousel\owl.transitions.css" />
-    <Content Include="Content\SliderImages\bakedAsCunt.jpg" />
-    <Content Include="Content\SliderImages\DrugsNotHugs.jpg" />
-    <Content Include="Content\SliderImages\Ironlak.jpg" />
-    <Content Include="Content\SliderImages\mdmaShirt.jpg" />
+    <Content Include="Content\ShirtPics\420\1.jpg" />
+    <Content Include="Content\ShirtPics\Baked As Cunt\1.jpg" />
+    <Content Include="Content\ShirtPics\Baked As Cunt\2.jpg" />
+    <Content Include="Content\ShirtPics\Bond St\1.jpg" />
+    <Content Include="Content\ShirtPics\Bond St\2.jpg" />
+    <Content Include="Content\ShirtPics\Bond St\3.jpg" />
+    <Content Include="Content\ShirtPics\Bond St\4.jpg" />
+    <Content Include="Content\ShirtPics\Centrelink\1.jpg" />
+    <Content Include="Content\ShirtPics\Centrelink\2.jpg" />
+    <Content Include="Content\ShirtPics\Centrelink\3.jpg" />
+    <Content Include="Content\ShirtPics\Centrelink\4.jpg" />
+    <Content Include="Content\ShirtPics\Centrelink\5.jpg" />
+    <Content Include="Content\ShirtPics\Fuck Coke - Tyler, The Creator\1.jpg" />
+    <Content Include="Content\ShirtPics\Fuck Coke - Tyler, The Creator\2.jpg" />
+    <Content Include="Content\ShirtPics\Fuck Coke - Tyler, The Creator\3.jpg" />
+    <Content Include="Content\ShirtPics\In My Death - Tupac\1.jpg" />
+    <Content Include="Content\ShirtPics\Jesus MDMA\1.jpg" />
+    <Content Include="Content\ShirtPics\Jesus MDMA\2.jpg" />
+    <Content Include="Content\ShirtPics\Jesus MDMA\3.jpg" />
+    <Content Include="Content\ShirtPics\Jesus MDMA\4.jpg" />
+    <Content Include="Content\ShirtPics\Jesus MDMA\5.jpg" />
+    <Content Include="Content\ShirtPics\Jesus MDMA\6.jpg" />
+    <Content Include="Content\ShirtPics\Marlboro\1.jpg" />
+    <Content Include="Content\ShirtPics\Pingers\1.jpg" />
+    <Content Include="Content\ShirtPics\Pingers\2.jpg" />
+    <Content Include="Content\ShirtPics\Pingers\3.jpg" />
+    <Content Include="Content\ShirtPics\Red Heads\1.jpg" />
+    <Content Include="Content\ShirtPics\Red Heads\2.jpg" />
+    <Content Include="Content\ShirtPics\Run The Trap\1.jpg" />
+    <Content Include="Content\ShirtPics\Run The Trap\2.jpg" />
+    <Content Include="Content\ShirtPics\Run The Trap\3.jpg" />
+    <Content Include="Content\ShirtPics\Sea Turtle\1.jpg" />
+    <Content Include="Content\ShirtPics\Sea Turtle\2.jpg" />
+    <Content Include="Content\ShirtPics\Sea Turtle\3.jpg" />
+    <Content Include="Content\ShirtPics\Sea Turtle\4.jpg" />
+    <Content Include="Content\ShirtPics\Studio - Earl Sweatshirt\1.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -324,6 +356,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ShirtPics\Drugs Not Hugs\" />
     <Folder Include="Models\Meta\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

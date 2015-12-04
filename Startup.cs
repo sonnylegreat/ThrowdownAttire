@@ -4,12 +4,7 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 using ThrowdownAttire.Models;
-using System.Net;
-using System.Configuration;
-using System.IO;
-using Newtonsoft.Json;
 using ThrowdownAttire.App_Start;
-using Newtonsoft.Json.Linq;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Threading.Tasks;
@@ -24,19 +19,7 @@ namespace ThrowdownAttire
         {
             initializeData().Wait();
 
-            var newDocs = createReplaceDocs(Globals.Shirts);
-
-            changeData(newDocs).Wait();
-
             ConfigureAuth(app);
-        }
-
-        private async Task changeData(BsonDocument[] newDocs)
-        {
-            var db = new DBContext().GetDatabase();
-            var collection = db.GetCollection<BsonDocument>("Shirts");
-
-            await collection.InsertManyAsync(newDocs);
         }
 
         private async Task initializeData()
@@ -44,63 +27,35 @@ namespace ThrowdownAttire
             var db = new DBContext().GetDatabase();
             var collection = db.GetCollection<BsonDocument>("Shirts");
 
-            var bson = await collection.Find(new BsonDocument() { { "_id", Globals.ShirtDocumentId } }).SingleAsync();
+            var docs = await collection.Find(new BsonDocument()).ToListAsync();
 
-            Globals.Shirts = createShirtsFromBson(bson);
+            foreach(var doc in docs)
+            {
+                Globals.Shirts.Add(createShirtFromBson(doc));
+            }
         }
 
-        private BsonDocument[] createReplaceDocs(List<Shirt> shirts)
+        private Shirt createShirtFromBson(BsonDocument product)
         {
-            var docs = new BsonDocument[shirts.Count];
-            for(int i = 0; i < shirts.Count; i++)
+            var variants = new Dictionary<string, ObjectId>();
+
+            foreach (var variant in new String[] { "XS", "S", "M", "L", "XL" })
             {
-                var shirt = shirts.ElementAt(i);
-                var doc = new BsonDocument()
-                {
-                    {"id", shirt.Id },
-                    {"title", shirt.Title },
-                    {"handle", shirt.Handle },
-                    {"type", shirt.Type },
-                    {"price", shirt.Price },
-                    {"stock", shirt.Stock },
-                    {"description", shirt.Description },
-                    {"images", new BsonArray(shirt.Photos) },
-                    {"variants", new BsonArray(shirt.Variants.Select(x => new BsonDocument(x.Key, x.Value)))}
-                };
-
-                docs[i] = doc;
-            }
-            return docs;
-        }
-
-        private List<Shirt> createShirtsFromBson(BsonDocument bson)
-        {
-            var shirts = new List<Shirt>();
-
-            foreach (var product in bson["products"].AsBsonArray)
-            {
-                var variants = new Dictionary<string, ObjectId>();
-
-                foreach (var variant in product["variants"].AsBsonArray)
-                {
-                    variants.Add(variant["size"].AsString, variant["id"].AsObjectId);
-                }
-
-                shirts.Add(new Models.Shirt()
-                {
-                    Id = product["id"].AsObjectId,
-                    Title = product["title"].AsString,
-                    Description = product["description"].AsString,
-                    Photos = product["images"].AsBsonArray.Select(x => x.ToString()).ToArray(),
-                    Handle = product["handle"].AsString,
-                    Price = product["price"].AsDouble,
-                    Stock = product["stock"].AsInt32,
-                    Type = product["type"].AsString,
-                    Variants = variants
-                });
+                variants.Add(variant, product["variants"].AsBsonArray.First(x => x.AsBsonDocument.Contains(variant))[variant].AsObjectId);
             }
 
-            return shirts;
+            return new Shirt()
+            {
+                Id = product["id"].AsObjectId,
+                Title = product["title"].AsString,
+                Description = product["description"].AsString,
+                Photos = product["images"].AsBsonArray.Select(x => x.ToString()).ToArray(),
+                Handle = product["handle"].AsString,
+                Price = product["price"].AsDouble,
+                Stock = product["stock"].AsInt32,
+                Type = product["type"].AsString,
+                Variants = variants
+            };
         }
     }
 }

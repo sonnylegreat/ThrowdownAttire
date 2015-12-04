@@ -27,8 +27,8 @@
                     <select id="size-selector" class="form-control">
                         @foreach (var size in Model.Variants)
                         {
-                            <option value="@size.Key">
-                                @size.Value
+                            <option value="@size.Value">
+                                @size.Key
                             </option>
                         }
                     </select>
@@ -43,7 +43,15 @@
                     <div class="item"><img src=@Model.Photos[i] id="photo-@i" width="800" height="550" /></div>
                 }
             </div>
-            <div id="buybutton" class="btn btn-lg snipcart-add-item" data-item-id="@Model.Variants["XS"]" data-item-name="@Model.Title" data-item-price="@Model.Price" data-item-url="@Request.Url"></div>
+            <button id="buybutton"  class="btn btn-lg snipcart-add-item" 
+                    data-item-image="@Model.Photos.First()" 
+                    data-item-id="@Model.Variants["XS"]"
+                    data-item-name="@Model.Title - XS" 
+                    data-item-price="@Model.Price" 
+                    data-item-url="@Request.Url"
+                    data-item-weight="200">
+                Add to Cart
+            </button>
         </div>
     </div>
 </div>
