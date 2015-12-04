@@ -25,10 +25,10 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="measurements">
                     <select id="size-selector" class="form-control">
-                        @foreach (var size in Model.Sizes)
+                        @foreach (var size in Model.Variants)
                         {
-                            <option value="@size.Value">
-                                @size.Key
+                            <option value="@size.Key">
+                                @size.Value
                             </option>
                         }
                     </select>
@@ -43,11 +43,7 @@
                     <div class="item"><img src=@Model.Photos[i] id="photo-@i" width="800" height="550" /></div>
                 }
             </div>
-            <div id="buybutton" data-embed_type="product" data-shop="throwdown-attire.myshopify.com" data-product_name="@Model.Title" data-product_handle="@Model.Handle" data-has_image="false" data-redirect_to="cart" data-buy_button_text="Add to cart" data-buy_button_out_of_stock_text="Out of Stock" data-buy_button_product_unavailable_text="Unavailable" data-button_background_color="e9f2ed" data-button_text_color="4d4a4a" data-product_modal="false" data-display_size="regular" data-product_title_color="000000" data-next_page_button_text="Next page" data-variant_id="@Model.Sizes["XS"]"></div>
-            <script type="text/javascript">
-                document.getElementById('ShopifyEmbedScript') || document.write('<script type="text/javascript" src="https://widgets.shopifyapps.com/assets/widgets/embed/client.js" id="ShopifyEmbedScript"><\/script>');
-            </script>
-            <noscript><a id="noscript" href="https://throwdown-attire.myshopify.com/cart/11673228483:1" target="_blank">Buy Baked As Cunt</a></noscript>
+            <div id="buybutton" class="btn btn-lg snipcart-add-item" data-item-id="@Model.Variants["XS"]" data-item-name="@Model.Title" data-item-price="@Model.Price" data-item-url="@Request.Url"></div>
         </div>
     </div>
 </div>

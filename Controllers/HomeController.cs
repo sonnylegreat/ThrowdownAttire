@@ -13,6 +13,8 @@ using System.Text;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ThrowdownAttire.Controllers
 {
@@ -20,11 +22,10 @@ namespace ThrowdownAttire.Controllers
     {
         public IMongoDatabase db = new DBContext().GetDatabase();
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
 
-            await insertIntoDB(Globals.Shirts);
+            ViewBag.Title = "Home Page";
 
             return View();
         }
@@ -56,45 +57,6 @@ namespace ThrowdownAttire.Controllers
             var responseStr = Encoding.UTF8.GetString(response);
 
             return new HttpStatusCodeResult(200);
-        }
-
-        private async Task<string> insertIntoDB(List<Shirt> shirts)
-        {
-
-            var document = new BsonDocument()
-            {
-                { "_id", ObjectId.GenerateNewId() }
-            };
-
-            var productArray = new BsonArray();
-
-            foreach (Shirt shirt in shirts)
-            {
-                productArray.Add(new BsonDocument()
-                {
-                    { "id", shirt.Id },
-                    { "title", shirt.Title },
-                    { "images", new BsonArray(shirt.Photos) },
-                    { "price", shirt.Price },
-                    { "stock", shirt.Stock },
-                    { "handle", shirt.Handle },
-                    { "description", shirt.Description },
-                    { "type", shirt.Type },
-                    { "variants", new BsonArray(shirt.Variants.Select(x => new BsonDocument()
-                        {
-                            {"id", x.Key },
-                            {"size", x.Value }
-                        }))
-                    }
-                });
-            }
-
-            document.AddRange(new BsonDocument() { { "products", productArray } });
-
-            var collection = db.GetCollection<BsonDocument>("Shirts");
-            await collection.InsertOneAsync(document);
-
-            return collection.ToJson();
         }
     }
 }
