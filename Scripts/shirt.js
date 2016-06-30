@@ -9,6 +9,9 @@
         var title = $buybutton.data("item-name").split("-");
 
         $buybutton.data("item-id", $(this).val());
-        $buybutton.data("item-name", title[0] + "-" + $("#size-selector :selected").text());
+        $buybutton.data("item-name", title[0] + "- " + $("#size-selector :selected").text().trim());
+
+        $buybutton.attr("data-item-id", $(this).val());
+        $buybutton.attr("data-item-name", title[0] + "- " + $("#size-selector :selected").text().trim());
     });
 });

@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" id="title" href="/">Throw Down Attire</a>
+                <a class="navbar-brand" id="shopname" href="/">Throw Down Attire</a>
             </div>
             <div class="navbar-collapse collapse" id="throwdown-collapse">
                 <ul class="nav navbar-nav">
@@ -41,10 +41,6 @@
         </div>
     </nav>
     @RenderBody();
-    <div data-checkout_button_text="Checkout" data-cart_button_text="Cart" data-button_text_color="ffffff" data-button_background_color="5c6962" data-background_color="ffffff" data-text_color="000000" data-accent_color="767676" data-cart_title="Cart" data-discount_notice_text="Shipping and discount codes are added at checkout." data-cart_total_text="Total" data-sticky="true" data-empty_cart_text="Your cart is empty." data-embed_type="cart" data-shop="throwdown-attire.myshopify.com"></div>
-    <script type="text/javascript">
-document.getElementById('ShopifyEmbedScript') || document.write('<script type="text/javascript" src="https://widgets.shopifyapps.com/assets/widgets/embed/client.js" id="ShopifyEmbedScript"><\/script>');
-    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

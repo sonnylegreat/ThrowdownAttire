@@ -9,7 +9,7 @@
         <div id="details" class="col-md-6">
             <div>
                 <h2 id="shirt-header"class="page-header">@Model.Title</h2>
-                <h2 id="price">$@Model.Price.ToString("0.00")</h2>
+                <h2 id="shirt-price">$@Model.Price.ToString("0.00")</h2>
             </div>
 
             <!-- Nav tabs -->
@@ -47,8 +47,8 @@
                     data-item-image="@Model.Photos.First()" 
                     data-item-id="@Model.Variants["XS"]"
                     data-item-name="@Model.Title - XS" 
-                    data-item-price="@Model.Price" 
-                    data-item-url="@Request.Url"
+                    data-item-price="29.99" 
+                    data-item-url="@Request.Url.ToString().Replace("http://localhost:64317", "http://aa318f0c.ngrok.io/")"
                     data-item-weight="200">
                 Add to Cart
             </button>

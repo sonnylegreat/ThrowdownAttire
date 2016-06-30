@@ -67,6 +67,21 @@ function createListeners() {
 $(document).ready(function () {
     $seriesClone = $("#series").clone();
 
+    $("#img-text").hide();
+
+    $(".carousel").mouseenter(function () {
+        $(this).carousel("pause");
+    }).mouseleave(function () {
+        $(this).carousel("cycle");
+    });
+
+    $("div.item img").mouseenter(function () {
+        $("#img-text").text($(this).data("text"));
+        $("#img-text").show();
+    }).mouseleave(function (event) {
+        $("#img-text").hide();
+    });
+
     $("li.series").click(function (event) {
         var $type = $(this).attr("value");
         show($type);

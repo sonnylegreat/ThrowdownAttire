@@ -17,9 +17,71 @@ namespace ThrowdownAttire
     {
         public void Configuration(IAppBuilder app)
         {
-            initializeData().Wait();
+            if (Globals.Testing)
+            {
+                initializeFakeData();
+            }
+            else
+            {
+                initializeData().Wait();
+            }
 
             ConfigureAuth(app);
+        }
+
+        private void initializeFakeData()
+        {
+            Globals.Shirts.AddRange(new Shirt[]
+            {
+                new Shirt()
+                {
+                    Id = ObjectId.GenerateNewId(),
+                    Title = "Baked As Cunt",
+                    Stock = 3,
+                    Description = "Drugs",
+                    Handle = "baked-as-cunt",
+                    Photos = new string[] 
+                    {
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195447/baked_as_cunt.jpg",
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195447/baked_as_cunt_2.jpg"
+                    },
+                    Price = 29.99,
+                    Type = "Drugs",
+                    Variants = new Dictionary<string, ObjectId>()
+                    {
+                        {"XS", ObjectId.GenerateNewId() },
+                        {"S", ObjectId.GenerateNewId() },
+                        {"M", ObjectId.GenerateNewId() },
+                        {"L", ObjectId.GenerateNewId() },
+                        {"XL", ObjectId.GenerateNewId() }
+                    }
+                },
+                new Shirt()
+                {
+                    Id = ObjectId.GenerateNewId(),
+                    Title = "Bond St",
+                    Stock = 3,
+                    Description = "FPP",
+                    Handle = "bond-st",
+                    Photos = new string[] 
+                    {
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st.jpg",
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_2.jpg",
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_3.jpg",
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_4.jpg"
+                    },
+                    Price = 29.99,
+                    Type = "FPP",
+                    Variants = new Dictionary<string, ObjectId>()
+                    {
+                        {"XS", ObjectId.GenerateNewId() },
+                        {"S", ObjectId.GenerateNewId() },
+                        {"M", ObjectId.GenerateNewId() },
+                        {"L", ObjectId.GenerateNewId() },
+                        {"XL", ObjectId.GenerateNewId() }
+                    }
+                }
+            });
         }
 
         private async Task initializeData()
