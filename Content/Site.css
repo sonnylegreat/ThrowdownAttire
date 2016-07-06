@@ -1,0 +1,191 @@
+﻿@font-face{
+    font-family: "Dripping Marker";
+    src: url("adrip1.ttf");
+}
+p{
+    font-family: Arial, serif;
+    font-size: 16px;
+}
+
+img, .shirtModal, .separator{
+    width: 100%;
+}
+#throwdown-collapse ul li a{
+    color: black;
+}
+.shirtModal{
+    padding-bottom: 0px;
+}
+.shirtModal .shirtContent{
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+.shirtModal .shirtContent:hover{
+    -webkit-transition: border 2s ease 1s;
+    transition: border linear 1s;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.modal-footer, .modal-body, .modal-header, .modal-pic{
+    margin: 0px;
+    border: none;
+    padding: 0px;
+}
+.modal-footer, .modal-header{
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+    visibility: hidden;
+}
+a.modal-link{
+    text-decoration: none;
+}
+a.modal-link:hover{
+    color: black;
+    text-decoration: none;
+}
+.inline{
+    display: inline;
+}
+.modal-pic{
+    width: 100%;
+    height: 200px;
+}
+.modal-body{
+    padding: 0px;
+}
+.thumbnail{
+    width: 50px;
+    height: 50px;
+    display: inline;
+}
+#navbar{
+    border-bottom-width: 1px;
+    border-bottom-color: black;
+    background-color: rgba(255, 255, 255, 0);
+    margin-bottom: 5px;
+}
+#addpage{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+}
+#shopname, a, a > span{
+    color: black;
+}
+#shopname{
+    font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
+    display: inline;
+}
+a.navbar-brand{
+    padding: 10px;
+}
+#seriesTitle{
+    padding-top: 20px;
+    margin-top: 0px;
+}
+#homepage{
+    background: url(../Content/logo.png) 50% 0 no-repeat fixed;
+    height: 1000px;
+}
+#series, #floats{
+}
+#shirt{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+}
+#shirtpic{
+    margin-top: 40px;
+}
+#shirt-header{
+    display:table-cell;
+    margin-top:0px;
+    border:none;
+    font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
+}
+.nav-tabs{
+    margin-top: 15px;
+}
+#shirt-price{
+    display: inline-block;
+    float: right;
+    margin-top: 40px;
+    border: 1px solid black;
+    background-color: white;
+    padding-bottom: 9px;
+}
+#buybutton{
+    width: 100%;
+    display:table-cell;
+    background-color: #1F1F1F;
+    color: white;
+}
+#header{
+    display:table;
+    width:100%
+}
+.details-container{
+    margin-left: 20px;
+    padding-top: 20px;
+}
+#sizing-chart{
+    width:100%;
+}
+#size-selector{
+    margin-top: 10px;
+}
+.carousel{
+    height:550px;
+    width:850px;
+    margin: auto;
+    margin-top: 5px;
+}
+.carousel-control.left, .carousel-control.right{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.0000) 100%);
+}
+.carousel-inner div.item img{
+    filter: none;
+    -webkit-filter: grayscale(0);
+    -webkit-transition: all .5s ease-in-out;
+}
+.carousel-inner div.item img:hover, .carousel:hover, .carousel-control:hover{
+    /* filter: url(filters.svg#grayscale); Firefox 3.5+ */
+      filter: gray; /* IE5+ */
+      -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+      -webkit-transform: scale(1.01);
+      
+}
+#shirtCarousel img{
+    width: 100%;
+    height: 500px;
+    border-radius: 4px;
+}
+#description-text{
+    padding-left: 25px;
+}
+#img-text{
+    position: absolute;
+    top:0;
+    z-index: 1000;
+    width: 850px;
+    height:100px;
+    line-height:550px;
+    color:#000;
+    text-align: center;
+    display:none;
+    font-size: 50px;
+    font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
+    -moz-transform: translateX(-16.6667%) translateY(-16.6667%) rotate(-30deg);
+    -webkit-transform: translateX(-16.6667%) translateY(-16.6667%) rotate(-30deg);
+    transform:  translateX(-16.6667%) translateY(-16.6667%) rotate(-30deg);
+}
+#thumb-container{
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+    width: 60%;
+}
+
+#thumb-container li{
+    display:inline;
+}

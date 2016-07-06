@@ -9,7 +9,7 @@
                 <div class="col-md-3 shirtContainer">
                     <a class="modal-link" href="~/Home/Shirt/@Model.ElementAt(j).Id">
                         <div class="shirtModal modal-dialog" data-type="@Model.ElementAt(j).Type.ToString().ToLower()">
-                            <div class="modal-content">
+                            <div class="modal-content shirtContent">
                                 <div class="modal-header">
                                     @if (Model.ElementAt(j).Title.Length > 18)
                                     {
@@ -33,7 +33,7 @@
                                 </div>
                                 <!-- dialog buttons -->
                                 <div class="modal-footer">
-                                    @Model.ElementAt(j).Description
+                                    @Model.ElementAt(j).Description - $@Model.ElementAt(j).Price.ToString("0.00")
                                 </div>
                             </div>
                         </div>

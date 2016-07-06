@@ -294,6 +294,7 @@
     <Content Include="Content\ShirtPics\Sea Turtle\3.jpg" />
     <Content Include="Content\ShirtPics\Sea Turtle\4.jpg" />
     <Content Include="Content\ShirtPics\Studio - Earl Sweatshirt\1.jpg" />
+    <Content Include="Content\sizing.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -352,6 +353,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Content\adrip1.ttf" />
     <None Include="Properties\PublishProfiles\throwdownattire.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\BootstrapModal\bootstrap-modal.js" />

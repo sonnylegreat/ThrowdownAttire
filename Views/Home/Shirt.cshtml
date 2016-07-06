@@ -7,24 +7,15 @@
 <div id="shirt">
     <h2 id="shirt-header" class="page-header"></h2>
     <div class="row">
-        <div id="info" class="col-md-5">
+        <div id="info" class="col-md-7">
             <div id="header">
-                <h2 id="shirt-header" class="inline">@Model.Title - $@Model.Price.ToString("0.00")</h2>
-                <button id="buybutton" class="btn btn-lg snipcart-add-item inline"
-                        data-item-image="@Model.Photos.First()"
-                        data-item-id="@Model.Variants["XS"]"
-                        data-item-name="@Model.Title - XS"
-                        data-item-price="29.99"
-                        data-item-url="@Request.Url.ToString().Replace("http://localhost:64317", "http://faccedb6.ngrok.io").Replace("Shirt/" + Model.Id, "Variant/" + Model.Variants["XS"].ToString())"
-                        data-item-weight="200">
-                    Add to Cart
-                </button>
+                <h1 id="shirt-header" class="inline">@Model.Title - $@Model.Price.ToString("0.00")</h1>
             </div>
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#details" aria-controls="description" role="tab" data-toggle="tab">Details</a></li>
-                <li role="presentation"><a href="#measurements" aria-controls="measurements" role="tab" data-toggle="tab">Measurements</a></li>
+                <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab"><strong>Details</strong></a></li>
+                <li role="presentation"><a href="#sizing" aria-controls="sizing" role="tab" data-toggle="tab"><strong>Sizing</strong></a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -32,16 +23,17 @@
                 <div role="tabpanel" class="tab-pane active" id="details">
                     <div class="details-container">
                         <ul>
-                            <li>Thin as fuck</li>
-                            <li>Loose fit</li>
-                            <li>Raw cut</li>
-                            <li>100% cotton</li>
+                            <li><p>Thin as fuck</p></li>
+                            <li><p>Loose fit</p></li>
+                            <li><p>Raw cut</p></li>
+                            <li><p>100% cotton</p></li>
                         </ul>
-                        <div id="description-text"><strong>Description: </strong>@Model.Description</div>
+                        <div id="description-text"><p><strong>Description: </strong>@Model.Description</p></div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="measurements">
+                <div role="tabpanel" class="tab-pane" id="sizing">
                     <div class="details-container">
+                        <img src="~/Content/sizing.png" id="sizing-chart" />
                         <select id="size-selector" class="form-control">
                             @foreach (var size in Model.Variants)
                             {
@@ -55,13 +47,22 @@
             </div>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-5">
             <div id="shirtCarousel">
                 @for (int i = 0; i < Model.Photos.Length; i++)
                 {
                     <div class="item"><img src=@Model.Photos[i] id="photo-@i" /></div>
                 }
             </div>
+            <button id="buybutton" class="btn btn-lg snipcart-add-item inline"
+                    data-item-image="@Model.Photos.First()"
+                    data-item-id="@Model.Variants["XS"]"
+                    data-item-name="@Model.Title - XS"
+                    data-item-price="29.99"
+                    data-item-url="@Request.Url.ToString().Replace("http://localhost:64317", "http://faccedb6.ngrok.io").Replace("Shirt/" + Model.Id, "Variant/" + Model.Variants["XS"].ToString())"
+                    data-item-weight="200">
+                Add to Cart
+            </button>
         </div>
     </div>
 </div>
