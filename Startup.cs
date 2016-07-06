@@ -8,6 +8,7 @@ using ThrowdownAttire.App_Start;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Threading.Tasks;
+using ThrowdownAttire.Repositories;
 
 [assembly: OwinStartup(typeof(ThrowdownAttire.Startup))]
 
@@ -86,38 +87,16 @@ namespace ThrowdownAttire
 
         private async Task initializeData()
         {
-            var db = new DBContext().GetDatabase();
-            var collection = db.GetCollection<BsonDocument>("Shirts");
 
-            var docs = await collection.Find(new BsonDocument()).ToListAsync();
+            var repo = new ShirtRepository();
+            var docs = await repo.collection.Find(new BsonDocument()).ToListAsync();
 
             foreach(var doc in docs)
             {
-                Globals.Shirts.Add(createShirtFromBson(doc));
-            }
-        }
-
-        private Shirt createShirtFromBson(BsonDocument product)
-        {
-            var variants = new Dictionary<string, ObjectId>();
-
-            foreach (var variant in new String[] { "XS", "S", "M", "L", "XL" })
-            {
-                variants.Add(variant, product["variants"].AsBsonArray.First(x => x.AsBsonDocument.Contains(variant))[variant].AsObjectId);
+                Globals.Shirts.Add(repo.createShirtFromBson(doc));
             }
 
-            return new Shirt()
-            {
-                Id = product["id"].AsObjectId,
-                Title = product["title"].AsString,
-                Description = product["description"].AsString,
-                Photos = product["images"].AsBsonArray.Select(x => x.ToString()).ToArray(),
-                Handle = product["handle"].AsString,
-                Price = product["price"].AsDouble,
-                Stock = product["stock"].AsInt32,
-                Type = product["type"].AsString,
-                Variants = variants
-            };
+            Globals.Shirts.Sort((x, y) => x.Title.CompareTo(y.Title));
         }
     }
 }

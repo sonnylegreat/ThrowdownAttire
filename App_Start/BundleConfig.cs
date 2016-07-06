@@ -9,7 +9,8 @@ namespace ThrowdownAttire
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-1.11.4.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -33,12 +34,24 @@ namespace ThrowdownAttire
                       "~/Scripts/floats.js"
                       ));
 
+            bundles.Add(new ScriptBundle("~/bundles/edit").Include(
+                      "~/Scripts/edit.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/admin").Include(
+                      "~/Scripts/TableSorter/jquery.tablesorter.js",
+                      "~/Scripts/admin.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/OwlCarousel/owl.carousel.css",
                       "~/Content/OwlCarousel/owl.theme.css",
                       "~/Content/OwlCarousel/owl.transitions.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/edit").Include(
+                          "~/Content/themes/base/all.css"));
         }
     }
 }

@@ -5,6 +5,7 @@
     ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div id="addpage">
     <div class="row">
         <div class="col-lg-offset-3 col-lg-6">
@@ -31,7 +32,7 @@
                         </div>
                     }
                     <h2>Add a Shirt</h2>
-                    <form id="createform" action="~/Admin/Create" method="post" enctype="multipart/form-data">
+                    <form id="createform" action="../../Admin/Create" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" name="title" class="form-control" id="title" placeholder="Title">
@@ -40,16 +41,16 @@
                             <label style="display:block" for="type">Series</label>
                             <div class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-default active">
-                                    <input type="radio" name="series" value="drugs" autocomplete="off" checked> Drugs
+                                    <input type="radio" name="series" id="drugs" value="Drugs" autocomplete="off" checked> Drugs
                                 </label>
                                 <label class="btn btn-default">
-                                    <input type="radio" name="series" value="lifestyle" autocomplete="off"> Lifestyle
+                                    <input type="radio" name="series" id="lifestyle" value="Lifestyle" autocomplete="off"> Lifestyle
                                 </label>
                                 <label class="btn btn-default">
-                                    <input type="radio" name="series" value="quote" autocomplete="off"> Quote
+                                    <input type="radio" name="series" id="quote" value="Quote" autocomplete="off"> Quote
                                 </label>
                                 <label class="btn btn-default">
-                                    <input type="radio" name="series" value="fpp" autocomplete="off"> FPP
+                                    <input type="radio" name="series" id="fpp" value="FPP" autocomplete="off"> FPP
                                 </label>
                             </div>
                         </div>
@@ -76,30 +77,34 @@
                 <div role="tabpanel" class="tab-pane" id="select">
                     <h2>Select a Shirt</h2>
                     <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>Title</th>
-                                <th>Type</th>
-                                <th>Price</th>
-                                <th>Stock</th>
-                                <th>Images</th>
-                            </tr>
-                            @foreach (var shirt in Model.shirts)
-                            {
+                        <table id="admin-table" class="table table-bordered tablesorter">
+                            <thead>
                                 <tr>
-                                    <td><a href="~/Admin/Edit/@shirt.Id">@shirt.Title</a></td>
-                                    <td><a href="~/Admin/Edit/@shirt.Id">@shirt.Type</a></td>
-                                    <td><a href="~/Admin/Edit/@shirt.Id">@shirt.Price</a></td>
-                                    <td><a href="~/Admin/Edit/@shirt.Id">@shirt.Stock</a></td>
-                                    <td>
-                                        @foreach (var pic in shirt.Photos)
-                                        {
-                                            <a href="@pic"><img class="thumbnail" src="@pic" /></a>
-                                        }
-                                    </td>
-                                    <td><span class="glyphicon glyphicon-trash" id="delete" style="color:red"></span></td>
+                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Title</th>
+                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Type</th>
+                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Price</th>
+                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Stock</th>
+                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Images</th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>
+                                @foreach (var shirt in Model.shirts)
+                                {
+                                    <tr>
+                                        <td><a href="~/Admin/Edit/@shirt.Id">@shirt.Title</a></td>
+                                        <td><a href="~/Admin/Edit/@shirt.Id">@shirt.Type</a></td>
+                                        <td><a href="~/Admin/Edit/@shirt.Id">@shirt.Price</a></td>
+                                        <td><a href="~/Admin/Edit/@shirt.Id">@shirt.Stock</a></td>
+                                        <td>
+                                            @foreach (var pic in shirt.Photos)
+                                            {
+                                                <a href="@pic"><img class="thumbnail" src="@pic" /></a>
+                                            }
+                                        </td>
+                                        <td><a href="#" data-id="@shirt.Id" class="delete"><span class="glyphicon glyphicon-trash" style="color:red"></span></a></td>
+                                    </tr>
+                                }
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -107,3 +112,5 @@
         </div>
     </div>
 </div>
+
+@Scripts.Render("~/bundles/admin")

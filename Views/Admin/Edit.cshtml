@@ -3,6 +3,77 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit</h2>
-
+@Scripts.Render("~/bundles/edit")
+@Styles.Render("~/Content/edit")
+<div class="row">
+    <div class="col-lg-offset-3 col-lg-6">
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.Success
+            </div>
+        }
+        @if (ViewBag.Failure != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Failure
+            </div>
+        }
+        <h2>Edit @Model.Title</h2>
+        <form id="editform" action="~/Admin/Edit" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" id="title" value="@Model.Title">
+            </div>
+            <div class="form-group">
+                <label style="display:block" for="type">Series</label>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default @if(Model.Type == "Drugs"){<text> active </text>}">
+                        <input type="radio" name="series" value="Drugs" autocomplete="off" @if(Model.Type == "Drugs"){<text> checked </text>}> Drugs
+                    </label>
+                    <label class="btn btn-default @if(Model.Type == "Lifestyle"){<text> active </text>}">
+                        <input type="radio" name="series" value="Lifestyle" autocomplete="off" @if(Model.Type == "Lifestyle"){<text> checked </text>}> Lifestyle
+                    </label>
+                    <label class="btn btn-default @if(Model.Type == "Quote"){<text> active </text>}">
+                        <input type="radio" name="series" value="Quote" autocomplete="off" @if(Model.Type == "Quote"){<text> checked </text>}> Quote
+                    </label>
+                    <label class="btn btn-default @if(Model.Type == "FPP"){<text> active </text>}">
+                        <input type="radio" name="series" value="FPP" autocomplete="off" @if(Model.Type == "FPP"){<text> checked </text>}> FPP
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="price-addon">$</span>
+                    <input type="text" class="form-control" name="price" aria-describedby="price-addon" id="price" value="@Model.Price">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" value="@Model.Description"></textarea>
+            </div>
+            <input type="hidden" value="@Model.Id" name="Id" id="Id" />
+        </form>
+        <form action="~/Admin/UploadPhoto" id="photo-upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="pictures">Upload/Delete Pictures</label>
+                <ul id="thumb-container">
+                    @foreach (var pic in Model.Photos)
+                    {
+                        <li class="ui-state-default">
+                            <a href="#" class="pic-delete"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
+                            <a href="@pic">
+                                <img class="thumbnail" src="@pic" />
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <input type="file" name="images" id="pictures" multiple>
+                <input type="hidden" value="@Model.Id" name="id" id="id" />
+            </div>
+        </form>
+        <button class="inline btn btn-default" id="back" type="button"><span class="glyphicon glyphicon-arrow-left"></span>Back</button>
+        <button type="submit" id="save" class="btn btn-default inline">Save</button>
+    </div>
+</div>

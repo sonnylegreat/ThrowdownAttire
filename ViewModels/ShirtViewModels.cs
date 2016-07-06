@@ -12,7 +12,6 @@ namespace ThrowdownAttire.ViewModels
         public string series { get; set; }
         public double price { get; set; }
         public string description { get; set; }
-        public CloudinaryDotNet.Cloudinary cloudinary { get; set; }
         public HttpPostedFileBase[] images { get; set; }
     }
 
@@ -24,10 +23,10 @@ namespace ThrowdownAttire.ViewModels
 
     public class ShirtEditViewModel
     {
+        public string Id { get; set; }
         public string title { get; set; }
         public string series { get; set; }
         public double price { get; set; }
         public string description { get; set; }
-        public HttpPostedFileBase[] images { get; set; }
     }
 }
