@@ -1,0 +1,16 @@
+﻿@using ThrowdownAttire.ViewModels
+@model ShirtVariantViewModel
+@{
+    ViewBag.Title = "Variant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<button id="buybutton" class="btn btn-lg snipcart-add-item inline"
+        data-item-image="@Model.Shirt.Photos.First()"
+        data-item-id="@Model.Shirt.Variants[Model.Variant]"
+        data-item-name="@Model.Shirt.Title - @Model.Variant"
+        data-item-price="29.99"
+        data-item-url="@Request.Url.ToString().Replace("http://localhost:64317", "http://faccedb6.ngrok.io/")"
+        data-item-weight="200">
+    Add to Cart
+</button>

@@ -21,6 +21,12 @@ namespace ThrowdownAttire.ViewModels
         public ShirtCreateViewModel shirtCreateModel;
     }
 
+    public class ShirtVariantViewModel
+    {
+        public Shirt Shirt;
+        public string Variant;
+    }
+
     public class ShirtEditViewModel
     {
         public string Id { get; set; }

@@ -5,6 +5,8 @@ using ThrowdownAttire.App_Start;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using MongoDB.Bson;
+using ThrowdownAttire.ViewModels;
 
 namespace ThrowdownAttire.Controllers
 {
@@ -60,6 +62,18 @@ namespace ThrowdownAttire.Controllers
         {
             ViewBag.Title = "FPP";
             return View("Floats", getShirts("FPP"));
+        }
+
+        [HttpGet]
+        public ActionResult Variant(string id)
+        {
+            var oid = new ObjectId(id);
+
+            var model = new ShirtVariantViewModel();
+            model.Shirt = Globals.Shirts.FirstOrDefault(x => x.Variants.Values.Contains(oid));
+            model.Variant = model.Shirt.Variants.FirstOrDefault(x => x.Value == oid).Key;
+
+            return View(model);
         }
 
         private IEnumerable<Shirt> getShirts(string type)

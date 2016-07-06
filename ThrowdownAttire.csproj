@@ -405,6 +405,7 @@
     <Content Include="Views\Auth\AdminLogin.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Home\Floats.cshtml" />
+    <Content Include="Views\Home\Variant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
