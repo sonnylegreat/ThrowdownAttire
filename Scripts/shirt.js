@@ -1,9 +1,4 @@
 ﻿$(document).ready(function () {
-    $("#owlCarousel").owlCarousel({
-        items: 1,
-        paginationNumbers: true
-    });
-
     $("body").css("background", "url(../../Content/background.jpg) 0 fixed");
 
     $("#size-selector").change(function () {
@@ -21,5 +16,10 @@
         $buybutton.attr("data-item-id", $(this).val());
         $buybutton.attr("data-item-name", title[0] + "- " + $("#size-selector :selected").text().trim());
         $buybutton.attr("data-item-url", url + "/" + $(this).val());
+    });
+
+    $(".modal-trigger").click(function () {
+        var pic = $(this).find("img").first().attr("src");
+        $("#modal-pic").attr("src", pic);
     });
 });

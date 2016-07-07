@@ -1,12 +1,20 @@
 ﻿<div id="series">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div id="series-carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            <li data-target="#series-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#series-carousel" data-slide-to="1"></li>
+            <li data-target="#series-carousel" data-slide-to="2"></li>
+            <li data-target="#series-carousel" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
+            <a class="img-link" href="/drugs">
+                <h1 id="img-text">Drugs</h1>
+                @if (!Request.Browser.IsMobileDevice)
+                {
+                    <p id="img-msg">Click to enter.</p>
+                }
+            </a>
+            <h1 id="img-text">Drugs</h1>
             <div class="item active" data-text="Drugs">
                 <a href="/drugs"><img src="~/Content/ShirtPics/Drugs Not Hugs/1_adjusted.jpg" id="drugs" /></a>
             </div>
@@ -20,15 +28,14 @@
                 <a href="/fpp"><img src="~/Content/ShirtPics/Marlboro/1_adjusted.jpg" id="fpp" /></a>
             </div>
         </div>
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <a class="left carousel-control" href="#series-carousel" role="button" data-slide="prev">
             <span class="icon-prev" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <a class="right carousel-control" href="#series-carousel" role="button" data-slide="next">
             <span class="icon-next" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-        <h1 id="img-text">Drugs</h1>
     </div>
 </div>
 @Scripts.Render("~/bundles/series")

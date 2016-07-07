@@ -10,16 +10,6 @@
                     <a class="modal-link" href="~/Home/Shirt/@Model.ElementAt(j).Id">
                         <div class="shirtModal modal-dialog" data-type="@Model.ElementAt(j).Type.ToString().ToLower()">
                             <div class="modal-content shirtContent">
-                                <div class="modal-header">
-                                    @if (Model.ElementAt(j).Title.Length > 18)
-                                    {
-                                        <h2 class="modal-title">@Model.ElementAt(j).Title.Substring(0, 16)...</h2>
-                                    }
-                                    else
-                                    {
-                                        <h2 class="modal-title">@Model.ElementAt(j).Title</h2>
-                                    }
-                                </div>
                                 <!-- dialog body -->
                                 <div class="modal-body">
                                     @if (@Model.ElementAt(j).Photos.Length > 0)
@@ -33,7 +23,15 @@
                                 </div>
                                 <!-- dialog buttons -->
                                 <div class="modal-footer">
-                                    @Model.ElementAt(j).Description - $@Model.ElementAt(j).Price.ToString("0.00")
+                                    @if (Model.ElementAt(j).Title.Length > 18)
+                                    {
+                                        <h2 class="modal-title">@Model.ElementAt(j).Title.Substring(0, 16)...</h2>
+                                    }
+                                    else
+                                    {
+                                        <h2 class="modal-title">@Model.ElementAt(j).Title</h2>
+                                    }
+                                    $@Model.ElementAt(j).Price.ToString("0.00")
                                 </div>
                             </div>
                         </div>
