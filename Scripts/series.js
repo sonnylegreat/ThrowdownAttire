@@ -25,6 +25,9 @@
         if(current == "Fuck Plain Packaging"){
             current = "FPP";
         }
+        if (current == "Quotes") {
+            current = "Quote";
+        }
         $(".img-link").first().attr("href", "/" + current);
     });
 });

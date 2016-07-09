@@ -18,13 +18,11 @@ img, .shirtModal, .separator{
 }
 .shirtModal .shirtContent{
     box-shadow: none;
-    border: 1px solid rgba(0, 0, 0, 0);
+    border: none;
 }
-.shirtModal .shirtContent:hover{
-    -webkit-transition: border 2s ease 1s;
-    transition: border linear 1s;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-}
+.nav li a{
+    font-weight: bold;
+} 
 .modal-footer, .modal-body, .modal-pic{
     margin: 0px;
     border: none;
@@ -218,7 +216,7 @@ and (max-device-width: 736px){
     #img-text{
     position: absolute;
     top:0;
-    display:block;
+    display:none;
     z-index: 1000;
     width: 320px;
     height:100px;
