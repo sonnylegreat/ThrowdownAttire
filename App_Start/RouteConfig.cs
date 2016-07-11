@@ -14,6 +14,12 @@ namespace ThrowdownAttire
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Shirt",
+                url: "Shirt/{id}",
+                defaults: new { controller = "Home", action = "Shirt" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{action}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

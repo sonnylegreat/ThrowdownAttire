@@ -5,6 +5,9 @@
 body{
     background-color: #eeeeee;
 }
+h1, h2, h3{
+    font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
+}
 .details-container ul li{
     font-family: Arial, serif;
     font-size: 25px;
@@ -129,7 +132,6 @@ a.modal-link:hover{
 }
 #shirt-header h1, #shirt-header h3{
     display: inline;
-    font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
 }
 .nav-tabs{
     margin-top: 15px;

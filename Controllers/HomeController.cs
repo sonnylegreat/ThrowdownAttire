@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using ThrowdownAttire.ViewModels;
+using Postal;
 
 namespace ThrowdownAttire.Controllers
 {
@@ -64,9 +65,21 @@ namespace ThrowdownAttire.Controllers
             return View("Floats", getShirts("FPP"));
         }
 
+        [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Title = "Contact";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(string name, string useremail, string title, string message)
+        {
+            dynamic email = new Email("Contact");
+            email.From = useremail;
+            email.Name = name;
+            email.Title = title;
+            email.Message = message;
+            email.Send();
             return View();
         }
 
