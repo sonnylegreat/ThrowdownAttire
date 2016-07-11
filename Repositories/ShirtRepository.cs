@@ -57,8 +57,7 @@ namespace ThrowdownAttire.Repositories
         public List<string> uploadImages(HttpPostedFileBase[] images, string title)
         {
 
-            var account = new Account(Globals.CloudinaryName, Globals.CloudinaryAPIKey, Globals.CloudinarySecret);
-            var cloudinary = new Cloudinary(account);
+            var cloudinary = getCloudinary();
 
             var urls = new List<string>();
 
@@ -108,8 +107,7 @@ namespace ThrowdownAttire.Repositories
 
         public void deleteImage(string pub_id)
         {
-            var account = new Account(Globals.CloudinaryName, Globals.CloudinaryAPIKey, Globals.CloudinarySecret);
-            var cloudinary = new Cloudinary(account);
+            var cloudinary = getCloudinary();
 
             cloudinary.DeleteResources(new DelResParams()
             {
@@ -152,6 +150,12 @@ namespace ThrowdownAttire.Repositories
                 Type = product["type"].AsString,
                 Variants = variants
             };
+        }
+        
+        private Cloudinary getCloudinary()
+        {
+            var account = new Account(Globals.CloudinaryName, Globals.CloudinaryAPIKey, Globals.CloudinarySecret);
+            return new Cloudinary(account);
         }
     }
 }

@@ -11,26 +11,19 @@
                         <div class="shirtModal modal-dialog" data-type="@Model.ElementAt(j).Type.ToString().ToLower()">
                             <div class="modal-content shirtContent">
                                 <!-- dialog body -->
-                                <div class="modal-body">
-                                    @if (@Model.ElementAt(j).Photos.Length > 0)
-                                    {
-                                        <img class="modal-pic" alt="@Model.ElementAt(j).Handle" src="@Model.ElementAt(j).Photos[0]" />
-                                    }
-                                    else
-                                    {
+                                @if (@Model.ElementAt(j).Photos.Length > 0)
+                                {
+                                    <div class="modal-body" style="background:url(@Model.ElementAt(j).Photos.First()) no-repeat center center; background-size: 200px 200px"></div>
+                                }
+                                else
+                                {
+                                    <div class="modal-body">
                                         <img class="modal-pic" alt="@Model.ElementAt(j).Handle" src="null" />
-                                    }
-                                </div>
+                                    </div>
+                                }
                                 <!-- dialog buttons -->
                                 <div class="modal-footer">
-                                    @if (Model.ElementAt(j).Title.Length > 18)
-                                    {
-                                        <h2 class="modal-title">@Model.ElementAt(j).Title.Substring(0, 16)...</h2>
-                                    }
-                                    else
-                                    {
-                                        <h2 class="modal-title">@Model.ElementAt(j).Title</h2>
-                                    }
+                                    <h2 class="modal-title">@Model.ElementAt(j).Title</h2>
                                     $@Model.ElementAt(j).Price.ToString("0.00")
                                 </div>
                             </div>

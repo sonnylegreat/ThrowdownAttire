@@ -259,6 +259,7 @@
     <Content Include="Content\Hover\hover.css" />
     <Content Include="Content\logo.png" />
     <Content Include="Content\logonobackground.png" />
+    <Content Include="Content\logo_small.png" />
     <Content Include="Content\OwlCarousel\AjaxLoader.gif" />
     <Content Include="Content\OwlCarousel\grabbing.png" />
     <Content Include="Content\OwlCarousel\owl.carousel.css" />
@@ -414,6 +415,7 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Home\Floats.cshtml" />
     <Content Include="Views\Home\Variant.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

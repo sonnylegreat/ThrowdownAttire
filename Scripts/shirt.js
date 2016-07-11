@@ -1,6 +1,4 @@
 ﻿$(document).ready(function () {
-    $("body").css("background", "url(../../Content/background.jpg) 0 fixed");
-
     $("#size-selector").change(function () {
         var $buybutton = $("#buybutton");
         var title = $buybutton.data("item-name").split("-");

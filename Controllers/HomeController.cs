@@ -64,6 +64,12 @@ namespace ThrowdownAttire.Controllers
             return View("Floats", getShirts("FPP"));
         }
 
+        public ActionResult Contact()
+        {
+            ViewBag.Title = "Contact";
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Variant(string id)
         {

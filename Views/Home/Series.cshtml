@@ -7,14 +7,6 @@
             <li data-target="#series-carousel" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-            <a class="img-link" href="/drugs">
-                <h1 id="img-text">Drugs</h1>
-                @if (!Request.Browser.IsMobileDevice)
-                {
-                    <p id="img-msg">Click to enter.</p>
-                }
-            </a>
-            <h1 id="img-text">Drugs</h1>
             <div class="item active" data-text="Drugs">
                 <a href="/drugs"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1467959451/1_adjusted_dfvpey.jpg" id="drugs" /></a>
             </div>
@@ -22,7 +14,7 @@
                 <a href="/quote"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1467959494/1_adjusted_oirgrh.jpg" value="" id="quote" /></a>
             </div>
             <div class="item" data-text="Lifestyle">
-                <a href="/lifestyle"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1467959309/3_adjusted_arvm7f.jpg" id="lifestyle" /></a>
+                <a href="/lifestyle"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1468220930/3_adjusted_ci9odi.png" id="lifestyle" /></a>
             </div>
             <div class="item" data-text="Fuck Plain Packaging">
                 <a href="/fpp"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1467959538/1_adjusted_jb2fwx.jpg" id="fpp" /></a>
@@ -36,6 +28,14 @@
             <span class="icon-next" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+        <a class="img-link" href="/drugs">
+            <h1 id="img-text">Drugs</h1>
+            @if (!Request.Browser.IsMobileDevice)
+        {
+                <p id="img-msg">Click to enter.</p>
+            }
+        </a>
+        <h1 id="img-text">Drugs</h1>
     </div>
 </div>
 @Scripts.Render("~/bundles/series")

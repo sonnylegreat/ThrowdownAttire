@@ -9,7 +9,7 @@
     <div class="row">
         <div id="info" class="col-md-offset-1 col-md-5">
             <div id="header">
-                <h1 id="shirt-header" class="inline">@Model.Title - $@Model.Price.ToString("0.00")</h1>
+                <div id="shirt-header"><h1>@Model.Title -</h1> <h3>$@Model.Price.ToString("0.00")</h3></div>
             </div>
 
             <!-- Nav tabs -->
@@ -23,12 +23,15 @@
                 <div role="tabpanel" class="tab-pane active" id="details">
                     <div class="details-container">
                         <ul>
-                            <li><p>Thin as fuck</p></li>
-                            <li><p>Loose fit</p></li>
-                            <li><p>Raw cut</p></li>
-                            <li><p>100% cotton</p></li>
+                            <li>Thin as fuck</li>
+                            <li>Loose fit</li>
+                            <li>Raw cut</li>
+                            <li>100% cotton</li>
                         </ul>
+                        @if (Model.Description != Model.Type)
+                        {
                         <div id="description-text"><p><strong>Description: </strong>@Model.Description</p></div>
+                        }
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="sizing">

@@ -2,11 +2,26 @@
     font-family: "Dripping Marker";
     src: url("adrip1.ttf");
 }
-p{
-    font-family: Arial, serif;
-    font-size: 16px;
+body{
+    background-color: #eeeeee;
 }
-
+.details-container ul li{
+    font-family: Arial, serif;
+    font-size: 25px;
+    line-height:1em;
+    font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
+}
+.navbar-nav li a img{
+    width: 25px;
+}
+#social > li > a{
+    padding: 2px;
+    padding-top:15px;
+}
+.navbar-header > a.navbar-brand{
+    padding: 15px;
+    padding-left: 40px;
+}
 img, .shirtModal, .separator{
     width: 100%;
 }
@@ -47,12 +62,16 @@ a.modal-link:hover{
     display: inline;
 }
 .modal-pic{
-    width: 100%;
+    text-align: center;
+    width: 200px;
     height: 200px;
     border-radius:10px;
 }
 .modal-body{
     padding: 0px;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
 }
 .close{
     padding-right:5px;
@@ -80,8 +99,9 @@ a.modal-link:hover{
     font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
     display: inline;
 }
-a.navbar-brand{
+.navbar-header > a.navbar-brand{
     padding: 10px;
+    padding-left: 40px;
 }
 #seriesTitle{
     padding-top: 20px;
@@ -90,6 +110,7 @@ a.navbar-brand{
 #homepage{
     background: url(../Content/logo.png) 50% 0 no-repeat fixed;
     height: 1000px;
+    overflow: hidden;
 }
 #series, #floats{
 }
@@ -105,6 +126,9 @@ a.navbar-brand{
     display:table-cell;
     margin-top:0px;
     border:none;
+}
+#shirt-header h1, #shirt-header h3{
+    display: inline;
     font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
 }
 .nav-tabs{
