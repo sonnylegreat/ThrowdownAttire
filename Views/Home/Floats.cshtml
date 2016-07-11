@@ -7,7 +7,7 @@
             @for (int j = i; j < Model.Count() && j < i + 4; j++)
             {
                 <div class="col-md-3 shirtContainer">
-                    <a class="modal-link" href="~/shirt/@Model.ElementAt(j).Id">
+                    <a class="modal-link" href="~/shirt/@Model.ElementAt(j).Handle">
                         <div class="shirtModal modal-dialog" data-type="@Model.ElementAt(j).Type.ToString().ToLower()">
                             <div class="modal-content shirtContent">
                                 <!-- dialog body -->

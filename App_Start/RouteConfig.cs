@@ -20,6 +20,12 @@ namespace ThrowdownAttire
             );
 
             routes.MapRoute(
+                name: "Series",
+                url: "Series/{id}",
+                defaults: new { controller = "Home", action = "Series" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{action}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -1,24 +1,29 @@
-﻿<div id="series">
+﻿@model Dictionary<string, string>
+<div id="series">
     <div id="series-carousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#series-carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#series-carousel" data-slide-to="1"></li>
-            <li data-target="#series-carousel" data-slide-to="2"></li>
-            <li data-target="#series-carousel" data-slide-to="3"></li>
+            @for (int i = 1; i < Model.Keys.Count; i++)
+            {
+                <li data-target="#series-carousel" data-slide-to="@i"></li>
+            }
         </ol>
         <div class="carousel-inner" role="listbox">
-            <div class="item active" data-text="Drugs">
-                <a href="/drugs"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1467959451/1_adjusted_dfvpey.jpg" id="drugs" /></a>
-            </div>
-            <div class="item" data-text="Quotes">
-                <a href="/quote"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1467959494/1_adjusted_oirgrh.jpg" value="" id="quote" /></a>
-            </div>
-            <div class="item" data-text="Lifestyle">
-                <a href="/lifestyle"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1468220930/3_adjusted_ci9odi.png" id="lifestyle" /></a>
-            </div>
-            <div class="item" data-text="Fuck Plain Packaging">
-                <a href="/fpp"><img src="http://res.cloudinary.com/throw-down-attire/image/upload/v1467959538/1_adjusted_jb2fwx.jpg" id="fpp" /></a>
-            </div>
+            @foreach (var type in Model.Keys)
+            {
+                if (type == Model.Keys.First())
+                {
+                    <div class="item active" data-text="@type">
+                        <a href="/Series/@type.Replace(" ", "")"><img src="@Model[type]" id="@type.ToLower()" /></a>
+                    </div>
+                }
+                else
+                {
+                    <div class="item" data-text="@type">
+                        <a href="/Series/@type.Replace(" ", "")"><img src="@Model[type]" id="@type.ToLower()"; /></a>
+                    </div>
+                }
+            }
         </div>
         <a class="left carousel-control" href="#series-carousel" role="button" data-slide="prev">
             <span class="icon-prev" aria-hidden="true"></span>
@@ -28,10 +33,10 @@
             <span class="icon-next" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-        <a class="img-link" href="/drugs">
+        <a class="img-link" href="/Series/Drugs">
             <h1 id="img-text">Drugs</h1>
             @if (!Request.Browser.IsMobileDevice)
-        {
+            {
                 <p id="img-msg">Click to enter.</p>
             }
         </a>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ThrowdownAttire.App_Start
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -28,11 +29,14 @@
             </div>
             <div class="navbar-collapse collapse" id="throwdown-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="series" value="series"><a href="~/series">Series</a></li>
-                    <li class="series" value="drugs"><a href="~/drugs">Drugs</a></li>
-                    <li class="series" value="quote"><a href="~/quote">Quote</a></li>
-                    <li class="series" value="lifestyle"><a href="~/lifestyle">Lifestyle</a></li>
-                    <li class="series" value="fpp"><a href="~/fpp">Fuck Plain Packaging</a></li>
+                    <li class="series" value="series"><a href="~/Series">Series</a></li>
+                    @foreach (var type in Globals.Types.Keys)
+                    {
+                        if (Globals.Types[type] != null)
+                        {
+                            <li class="series" value="@type.ToLower()"><a href="~/series/@type.Replace(" ", "").ToLower()">@type</a></li>
+                        }
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="about.html">About</a></li>

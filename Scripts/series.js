@@ -11,7 +11,11 @@
     $(".carousel").mouseenter(function () {
         var $this = $(this);
         $this.carousel("pause");
-        $imgText.text($($this.find(".active").children().first()).data("text"));
+        var text = $($this.find(".active").children().first()).data("text");
+        if (text == "Quote") {
+            text = "Quotes";
+        }
+        $imgText.text(text);
         $imgText.fadeIn(200);
 
         $("#series-carousel .carousel-inner div.item img").css(setGreyScale());
@@ -21,14 +25,11 @@
         $("#series-carousel .carousel-inner div.item img").css(clearGreyScale());
     }).on("slid.bs.carousel", function () {
         var current = $($(".carousel").find(".active").first()).data("text");
+        $(".img-link").first().attr("href", "/Series/" + current.replace(new RegExp(" ", "g"), ''));
+        if (current == "Quote") {
+            current = "Quotes";
+        }
         $imgText.text(current);
-        if(current == "Fuck Plain Packaging"){
-            current = "FPP";
-        }
-        if (current == "Quotes") {
-            current = "Quote";
-        }
-        $(".img-link").first().attr("href", "/" + current);
     });
 });
 

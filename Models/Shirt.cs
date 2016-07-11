@@ -22,6 +22,8 @@ namespace ThrowdownAttire.Models
 
         public string Type { get; set; }
 
+        public bool Display { get; set; }
+
         public String Description { get; set; }
 
         public Dictionary<string, ObjectId> Variants { get; set; } // Dictionary of each size and its ID. 

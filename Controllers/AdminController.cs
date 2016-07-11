@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ThrowdownAttire.App_Start;
 using ThrowdownAttire.ViewModels;
 using ThrowdownAttire.Repositories;
-using MongoDB.Bson;
 using System.Web.Routing;
 
 namespace ThrowdownAttire.Controllers
@@ -28,9 +26,20 @@ namespace ThrowdownAttire.Controllers
                 var repo = new ShirtRepository();
 
                 try {
+                    var displayBool = bool.Parse(model.display);
+                    if (model.newseries != null)
+                    {
+                        model.series = model.newseries;
+                        var url = repo.uploadSeriesImage(model.series, model.sliderimage);
+                        url = displayBool ? url : null;
+
+                        Globals.Types.Add(model.series, url);
+                    }
+
                     var shirt = repo.Create(model);
                     Globals.Shirts.Add(shirt);
                     Globals.Shirts.Sort((x, y) => x.Title.CompareTo(y.Title));
+                    Globals.Types = Globals.Types.OrderBy(x => x.Key.Length).ToDictionary(x => x.Key, x => x.Value);
                 }
                 catch(Exception e)
                 {
@@ -128,7 +137,36 @@ namespace ThrowdownAttire.Controllers
             var repo = new ShirtRepository();
             repo.deleteShirt(id);
 
-            Globals.Shirts.Remove(repo.FindShirtById(id));
+            var shirt = repo.FindShirtById(id);
+
+            Globals.Shirts.Remove(shirt);
+
+            if(Globals.Shirts.FirstOrDefault(x => x.Type == shirt.Type) == null)
+            {
+                Globals.Types.Remove(shirt.Type);
+                repo.deleteImage(shirt.Type);
+            }
+            else if(Globals.Shirts.FirstOrDefault(x => x.Type == shirt.Type && x.Display == true) == null)
+            {
+                Globals.Types[shirt.Type] = null;
+            }
+
+            return RedirectToAction("Admin", "Auth");
+        }
+
+        [HttpPost]
+        public ActionResult SetDisplay(string id, string display)
+        {
+            var repo = new ShirtRepository();
+            repo.UpdateShirt(id, "display", display);
+
+            var shirt = repo.FindShirtById(id);
+            shirt.Display = bool.Parse(display);
+
+            if(Globals.Shirts.FirstOrDefault(x => x.Type == shirt.Type && x.Display == true) == null)
+            {
+                Globals.Types[shirt.Type] = null;
+            }
 
             return RedirectToAction("Admin", "Auth");
         }

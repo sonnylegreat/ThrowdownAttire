@@ -93,10 +93,19 @@ namespace ThrowdownAttire
 
             foreach(var doc in docs)
             {
-                Globals.Shirts.Add(repo.createShirtFromBson(doc));
+                var shirt = repo.createShirtFromBson(doc);
+                if (!Globals.Types.Keys.Contains(shirt.Type) || (Globals.Types[shirt.Type] == null && shirt.Display == true))
+                {
+                    var url = shirt.Display ? 
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/" + shirt.Type + ".jpg" : null;
+                    Globals.Types.Add(shirt.Type, url);
+                }
+
+                Globals.Shirts.Add(shirt);
             }
 
             Globals.Shirts.Sort((x, y) => x.Title.CompareTo(y.Title));
+            Globals.Types = Globals.Types.OrderBy(x => x.Key.Length).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }

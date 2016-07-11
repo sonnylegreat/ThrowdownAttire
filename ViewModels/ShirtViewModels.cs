@@ -10,8 +10,11 @@ namespace ThrowdownAttire.ViewModels
     {
         public string title { get; set; }
         public string series { get; set; }
+        public string newseries { get; set; }
+        public HttpPostedFileBase sliderimage { get; set; }
         public double price { get; set; }
         public string description { get; set; }
+        public string display { get; set; }
         public HttpPostedFileBase[] images { get; set; }
     }
 

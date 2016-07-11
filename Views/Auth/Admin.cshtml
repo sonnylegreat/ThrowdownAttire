@@ -1,4 +1,4 @@
-﻿@using ThrowdownAttire.Models;
+﻿@using ThrowdownAttire.App_Start;
 @using ThrowdownAttire.ViewModels;
 @model ShirtCreateViewViewModel
 @{ 
@@ -37,22 +37,34 @@
                             <label for="title">Title</label>
                             <input type="text" name="title" class="form-control" id="title" placeholder="Title">
                         </div>
-                        <div class="form-group">
-                            <label style="display:block" for="type">Series</label>
+                        <div class="form-group series-container">
+                            <label style="display:block" for="series">Series</label>
                             <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input type="radio" name="series" id="drugs" value="Drugs" autocomplete="off" checked> Drugs
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio" name="series" id="lifestyle" value="Lifestyle" autocomplete="off"> Lifestyle
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio" name="series" id="quote" value="Quote" autocomplete="off"> Quote
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio" name="series" id="fpp" value="FPP" autocomplete="off"> FPP
-                                </label>
+                                @foreach (var type in Globals.Types.Keys)
+                                {
+                                    if (type == Globals.Types.Keys.First())
+                                    {
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="series" value="@type" autocomplete="off" checked />@type
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        <label class="btn btn-default">
+                                            <input type="radio" name="series" value="@type" autocomplete="off" />@type
+                                        </label>
+                                    }
+                                }
                             </div>
+                            <a href="#" id="add-series" class="inline"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </div>
+                        <div class="newseries-container form-group">
+                            <label for="title">New Series</label>
+                            <input type="text" name="newseries" class="form-control" id="newseries" placeholder="Series">
+                        </div>
+                        <div class="form-group newseries-container">
+                            <label for="sliderimage">Upload Slider Image</label>
+                            <input type="file" name="sliderimage" id="silderimage">
                         </div>
                         <div class="form-group">
                             <label for="price">Price</label>
@@ -64,6 +76,12 @@
                         <div class="form-group">
                             <label for="description">Description</label>
                             <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description"></textarea>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="true" name="display" id="display" checked>
+                                <strong>Display</strong>
+                            </label>
                         </div>
                         <div class="form-group">
                             <label for="pictures">Upload Pictures</label>
@@ -85,6 +103,7 @@
                                     <th><span class="glyphicon glyphicon-chevron-up"></span>Price</th>
                                     <th><span class="glyphicon glyphicon-chevron-up"></span>Stock</th>
                                     <th><span class="glyphicon glyphicon-chevron-up"></span>Images</th>
+                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Display</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -101,6 +120,8 @@
                                                 <a href="@pic"><img class="thumbnail" src="@pic" /></a>
                                             }
                                         </td>
+                                        <td><input data-id="@shirt.Id" type="checkbox" class="display-check" value="@shirt.Display.ToString()" @if(shirt.Display){<text>checked</text>}/></td>
+
                                         <td><a href="#" data-id="@shirt.Id" class="delete"><span class="glyphicon glyphicon-trash" style="color:red"></span></a></td>
                                     </tr>
                                 }

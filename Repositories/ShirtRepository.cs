@@ -29,16 +29,16 @@ namespace ThrowdownAttire.Repositories
             var images = uploadImages(model.images, model.title);
 
             var document = new BsonDocument()
-                {
-                    {"id", ObjectId.GenerateNewId() },
-                    {"title", model.title },
-                    {"handle", model.title.ToLower().Replace(' ', '-') },
-                    {"type", model.series },
-                    {"price", model.price },
-                    {"stock", 4 },
-                    {"description", model.description ?? model.series },
-                    {"images", new BsonArray(images) },
-                    {"variants", new BsonArray()
+            {
+                {"id", ObjectId.GenerateNewId() },
+                {"title", model.title },
+                {"handle", model.title.ToLower().Replace(' ', '-') },
+                {"type", model.series },
+                {"price", model.price },
+                {"stock", 4 },
+                {"description", model.description ?? model.series },
+                {"images", new BsonArray(images) },
+                {"variants", new BsonArray()
                     {
                         new BsonDocument() { {"XS", ObjectId.GenerateNewId() } },
                         new BsonDocument() { {"S", ObjectId.GenerateNewId() } },
@@ -46,12 +46,26 @@ namespace ThrowdownAttire.Repositories
                         new BsonDocument() { {"L", ObjectId.GenerateNewId() } },
                         new BsonDocument() { {"XL", ObjectId.GenerateNewId() } }
                     }
-                }
+                },
+                {"display", model.display }
             };
 
             collection.InsertOneAsync(document).Wait();
 
             return createShirtFromBson(document);
+        }
+
+        public string uploadSeriesImage(string series, HttpPostedFileBase sliderImage)
+        {
+            var cloudinary = getCloudinary();
+
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(series, sliderImage.InputStream),
+                PublicId = series
+            };
+
+            return cloudinary.Upload(uploadParams).Uri.ToString();
         }
 
         public List<string> uploadImages(HttpPostedFileBase[] images, string title)
@@ -71,10 +85,12 @@ namespace ThrowdownAttire.Repositories
                 //var memoryStream = new MemoryStream();
                 //image.InputStream.CopyTo(memoryStream);
 
+                var safetitle = title.ToLower().Replace(' ', '_').Replace("'", "_").Replace('"', '_').Replace("/","_") + "_" + i;
+
                 var uploadParams = new ImageUploadParams()
                 {
-                    File = new FileDescription(title.ToLower().Replace(' ', '_') + "_" + i, image.InputStream),
-                    PublicId = title.ToLower().Replace(' ', '_') + "_" + i
+                    File = new FileDescription(safetitle, image.InputStream),
+                    PublicId = safetitle
                 };
 
                 var upload = cloudinary.Upload(uploadParams);
@@ -93,6 +109,18 @@ namespace ThrowdownAttire.Repositories
                 .Set("handle", model.title.ToLower().Replace(' ', '-'))
                 .Set("price", model.price)
                 .Set("description", model.description ?? model.series);
+            var options = new FindOneAndUpdateOptions<BsonDocument>
+            {
+                ReturnDocument = ReturnDocument.After
+            };
+            return collection.FindOneAndUpdateAsync(filter, update, options).Result;
+        }
+
+        public BsonDocument UpdateShirt(string id, string field, string value)
+        {
+            var filter = new BsonDocument("id", new ObjectId(id));
+            var update = Builders<BsonDocument>.Update
+                .Set(field, value);
             var options = new FindOneAndUpdateOptions<BsonDocument>
             {
                 ReturnDocument = ReturnDocument.After
@@ -138,7 +166,7 @@ namespace ThrowdownAttire.Repositories
                 variants.Add(variant, product["variants"].AsBsonArray.First(x => x.AsBsonDocument.Contains(variant))[variant].AsObjectId);
             }
 
-            return new Shirt()
+            var shirt = new Shirt()
             {
                 Id = product["id"].AsObjectId,
                 Title = product["title"].AsString,
@@ -148,8 +176,11 @@ namespace ThrowdownAttire.Repositories
                 Price = product["price"].AsDouble,
                 Stock = product["stock"].AsInt32,
                 Type = product["type"].AsString,
+                Display = bool.Parse(product["display"].AsString),
                 Variants = variants
             };
+
+            return shirt;
         }
         
         private Cloudinary getCloudinary()

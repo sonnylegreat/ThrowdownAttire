@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using MongoDB.Bson;
 using ThrowdownAttire.ViewModels;
 using Postal;
+using System.Globalization;
 
 namespace ThrowdownAttire.Controllers
 {
@@ -29,40 +30,29 @@ namespace ThrowdownAttire.Controllers
             return View();
         }
 
-        public ActionResult Series()
+        public ActionResult Series(string id)
         {
-            ViewBag.Title = "Series";
+            if (id == null)
+            {
+                ViewBag.Title = "Series";
+                return View(Globals.Types.Where(x => x.Value != null).ToDictionary(x => x.Key, x=> x.Value));
+            }
+
+            foreach(var type in Globals.Types.Keys)
+            {
+                if(id.ToLower() == type.ToLower().Replace(" ", ""))
+                {
+                    ViewBag.Title = "Series - " + type;
+                    return View("Floats", getShirts(type));
+                }
+            }
 
             return View(Globals.Shirts);
         }
 
         public ActionResult Shirt(string id)
         {
-            return View(Globals.Shirts.FirstOrDefault(x => x.Id.ToString() == id));
-        }
-
-        public ActionResult Drugs()
-        {
-            ViewBag.Title = "Drugs";
-            return View("Floats", getShirts("Drugs"));
-        }
-
-        public ActionResult Quote()
-        {
-            ViewBag.Title = "Quote";
-            return View("Floats", getShirts("Quote"));
-        }
-
-        public ActionResult Lifestyle()
-        {
-            ViewBag.Title = "Lifestyle";
-            return View("Floats", getShirts("Lifestyle"));
-        }
-
-        public ActionResult FPP()
-        {
-            ViewBag.Title = "FPP";
-            return View("Floats", getShirts("FPP"));
+            return View(Globals.Shirts.FirstOrDefault(x => x.Handle == id));
         }
 
         [HttpGet]
@@ -97,7 +87,7 @@ namespace ThrowdownAttire.Controllers
 
         private IEnumerable<Shirt> getShirts(string type)
         {
-            return Globals.Shirts.Where(x => x.Type == type);
+            return Globals.Shirts.Where(x => x.Type.ToLower() == type.ToLower() && x.Display);
         }
     }
 }

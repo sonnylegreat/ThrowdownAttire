@@ -222,6 +222,9 @@ a.modal-link:hover{
 #thumb-container li{
     display:inline;
 }
+.newseries-container{
+    display: none;
+}
 
 @media only screen 
 and (min-device-width : 320px)
@@ -249,7 +252,7 @@ and (max-device-width: 736px){
     line-height:100px;
     color:#000;
     text-align: center;
-    font-size: 20px;
+    font-size: 40px;
     font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
     }
 }
