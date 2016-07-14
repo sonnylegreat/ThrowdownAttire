@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    var $faqClone = $(".faq-create").last().clone();
+    setClone($faqClone);
+
     $("#admin-table").tablesorter();
 
     $(".delete").click(function () {
@@ -66,4 +69,48 @@
             processData: false
         });
     });
+
+    $("#faq-add").click(function () {
+        $faqCreate = $(".faq-create");
+        if($faqCreate.find(".question").first().val() == "" || 
+            $faqCreate.find(".answer").first().val() == "") {
+            return;
+        }
+
+        $faqCreate.last().after($faqClone);
+        $faqClone = $(".faq-create").last().clone();
+        setClone($faqClone);
+    });
+
+    $("#faq-form").submit(function (e) {
+        e.preventDefault();
+
+        var json = {};
+
+        $(this).find(".question").each(function () {
+            var $this = $(this);
+            var selector = "#a" + "_" + $this.attr("id").split("_")[1];
+            var answer = $(selector).val();
+
+            json[$this.val()] = answer;
+        });
+
+        $.post("/Admin/FAQ", { "json": JSON.stringify(json) }, function () { window.location.reload(); });
+    });
 });
+
+function setClone($clone) {
+    $clone.find("label").each(function () {
+        var forVal = $(this).attr("for").split('_');
+        $(this).attr("for", forVal[0] + "_" + (parseInt(forVal[1]) + 1));
+    });
+
+    $clone.find("input").each(function () {
+        var idVal = $(this).attr("id").split('_');
+
+        $(this).attr({
+            id: idVal[0] + "_" + (parseInt(idVal[1]) + 1),
+            name: idVal[0] + "_" + (parseInt(idVal[1]) + 1)
+        });
+    });
+}

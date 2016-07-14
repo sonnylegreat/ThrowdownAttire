@@ -10,7 +10,7 @@
         <div id="info" class="col-md-offset-1 col-md-5">
             <div id="header">
                 <div id="shirt-header">
-                    <div id="header-info"><h1>@Model.Title -</h1> <h3>$@Model.Price.ToString("0.00")</h3></div>
+                    <div id="header-info"><h1>@Model.Title -</h1> <h3>$@Model.Price.ToString("0.00") - </h3></div>
                     <select id="size-selector" class="form-control">
                         @foreach (var size in Model.Variants)
                         {

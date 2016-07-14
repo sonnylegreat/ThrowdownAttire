@@ -1,13 +1,6 @@
 ﻿@model Dictionary<string, string>
 <div id="series">
     <div id="series-carousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#series-carousel" data-slide-to="0" class="active"></li>
-            @for (int i = 1; i < Model.Keys.Count; i++)
-            {
-                <li data-target="#series-carousel" data-slide-to="@i"></li>
-            }
-        </ol>
         <div class="carousel-inner" role="listbox">
             @foreach (var type in Model.Keys)
             {

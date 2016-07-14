@@ -16,10 +16,11 @@ namespace ThrowdownAttire.Repositories
     public class ShirtRepository
     {
         public IMongoCollection<BsonDocument> collection;
+        private IMongoDatabase db;
 
         public ShirtRepository()
         {
-            var db = new DBContext().GetDatabase();
+            db = new DBContext().GetDatabase();
             collection = db.GetCollection<BsonDocument>("Shirts");
         }
 
@@ -207,11 +208,36 @@ namespace ThrowdownAttire.Repositories
         {
             return Globals.Shirts.FirstOrDefault(x => x.Type == type && x.Display);
         }
-        
+
+        public void saveFAQs()
+        {
+            var FAQcollection = getFAQs();
+            FAQcollection.DeleteManyAsync(new BsonDocument()).Wait();
+
+            var newFAQs = new List<BsonDocument>();
+
+            for(int i = 0; i < Globals.FAQs.Keys.Count; i++)
+            {
+                newFAQs.Add(new BsonDocument()
+                {
+                    {"question", Globals.FAQs.Keys.ElementAt(i) },
+                    {"answer", Globals.FAQs.Values.ElementAt(i) }
+                });
+            }
+
+            FAQcollection.InsertManyAsync(newFAQs).Wait();
+        }
+
         private Cloudinary getCloudinary()
         {
             var account = new Account(Globals.CloudinaryName, Globals.CloudinaryAPIKey, Globals.CloudinarySecret);
             return new Cloudinary(account);
+        }
+
+        /**FAQ stuff*/
+        public IMongoCollection<BsonDocument> getFAQs()
+        {
+            return db.GetCollection<BsonDocument>("FAQs");
         }
     }
 }

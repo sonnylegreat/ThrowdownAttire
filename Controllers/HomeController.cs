@@ -85,6 +85,12 @@ namespace ThrowdownAttire.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult FAQ()
+        {
+            return View();
+        }
+
         private IEnumerable<Shirt> getShirts(string type)
         {
             return Globals.Shirts.Where(x => x.Type.ToLower() == type.ToLower() && x.Display && x.Photos.Length > 1);

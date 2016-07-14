@@ -5,7 +5,15 @@
 body{
     background-color: #eeeeee;
 }
-h1, h2, h3{
+div.panel-default > div.panel-collapse > div.faq-body{
+    padding: 10px;
+    font-size: 16px;
+}
+.faqsubmit, #faq-add{
+    display:block;
+    margin-top: 10px;
+}
+h1, h2, h3, #size-selector > option, #size-selector{
     font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
 }
 .details-container ul li{
@@ -129,7 +137,8 @@ a.modal-link:hover{
     height: 1000px;
     overflow: hidden;
 }
-#series, #floats{
+#success-text{
+    display: none;
 }
 #shirt{
     padding-left: 15px;
@@ -171,6 +180,9 @@ a.modal-link:hover{
     display:table;
     width:100%
 }
+#header-info{
+    display:inline;
+}
 .details-container{
     margin-left: 20px;
     padding-top: 20px;
@@ -179,9 +191,20 @@ a.modal-link:hover{
     width:100%;
 }
 #size-selector{
-    float:right;
-    width:75%;
-    display: inline;
+    width: auto;
+    display: table-cell;
+    font-size: 24px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding-top: 3px;
+    padding-left:0px;
+    color: #333333;
+}
+#size-selector > option{
+    font-size: 24px;
+    font-weight: 500;
 }
 #series-carousel{
     height:550px;

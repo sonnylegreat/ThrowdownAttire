@@ -1,0 +1,28 @@
+﻿@using ThrowdownAttire.App_Start
+@{
+    ViewBag.Title = "FAQ";
+}
+<div class="row">
+    <div class="col-md-offset-3 col-md-6">
+        <h2>FAQ</h2>
+        <div class="panel-group" id="slider-accordion" role="tablist" aria-multiselectable="true">
+            @for (int i = 0; i < Globals.FAQs.Keys.Count; i++)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading_@i">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#slider-accordion" href="#collapse_@i" aria-expanded="true" aria-controls="collapse_@i">
+                                <strong>@Globals.FAQs.Keys.ElementAt(i)</strong>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse_@i" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@i">
+                        <div class="panel-body faq-body">
+                           @Globals.FAQs.Values.ElementAt(i)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

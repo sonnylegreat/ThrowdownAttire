@@ -106,6 +106,13 @@ namespace ThrowdownAttire
 
             Globals.Shirts.Sort((x, y) => x.Title.CompareTo(y.Title));
             Globals.Types = Globals.Types.OrderBy(x => x.Key.Length).ToDictionary(x => x.Key, x => x.Value);
+
+            var faqDocs = await repo.getFAQs().Find(new BsonDocument()).ToListAsync();
+
+            foreach(var doc in faqDocs)
+            {
+                Globals.FAQs.Add(doc["question"].AsString, doc["answer"].AsString);
+            }
         }
     }
 }

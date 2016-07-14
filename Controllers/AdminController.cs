@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using ThrowdownAttire.App_Start;
 using ThrowdownAttire.ViewModels;
 using ThrowdownAttire.Repositories;
 using System.Web.Routing;
+using System.Collections.Generic;
 
 namespace ThrowdownAttire.Controllers
 {
@@ -101,23 +103,15 @@ namespace ThrowdownAttire.Controllers
             var repo = new ShirtRepository();
             var shirt = repo.FindShirtById(id);
 
-            try
-            {
-                var urls = repo.uploadImages(images, shirt.Title);
+            var urls = repo.uploadImages(images, shirt.Title);
 
-                var photoList = shirt.Photos.ToList();
-                photoList.AddRange(urls);
-                shirt.Photos = photoList.ToArray();
+            var photoList = shirt.Photos.ToList();
+            photoList.AddRange(urls);
+            shirt.Photos = photoList.ToArray();
 
-                repo.UpdateShirt(shirt);
+            repo.UpdateShirt(shirt);
 
-                ViewBag.Success = "Pictures added for shirt: " + shirt.Title;
-            }
-            catch (Exception e)
-            {
-                ViewBag.Failure = "Image upload failed " + e.Message;
-            }
-            return View("Edit", shirt.Id.ToString());
+            return new JsonResult() { Data = new { sources = urls } };
         }
 
         [HttpPost]
@@ -211,6 +205,24 @@ namespace ThrowdownAttire.Controllers
             var src = repo.updateSeriesImage(type, image);
 
             return new JsonResult() { Data = new { src = src } };
+        }
+
+        [HttpPost]
+        public ActionResult FAQ(string json)
+        {
+            if (!Authenticated())
+            {
+                return RedirectToAction("AdminLogin", "Auth");
+            }
+
+            var repo = new ShirtRepository();
+
+            var faqs = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            Globals.FAQs = faqs;
+
+            repo.saveFAQs();
+
+            return RedirectToAction("Admin", "Auth");
         }
 
         private bool Authenticated()
