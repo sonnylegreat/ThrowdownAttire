@@ -29,16 +29,16 @@
                 <label style="display:block" for="type">Series</label>
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default @if(Model.Type == "Drugs"){<text> active </text>}">
-                        <input type="radio" name="series" value="Drugs" autocomplete="off" @if(Model.Type == "Drugs"){<text> checked </text>}> Drugs
+                        <input type="radio" name="series" value="Drugs" autocomplete="off" @if (Model.Type == "Drugs") { <text> checked </text> }> Drugs
                     </label>
                     <label class="btn btn-default @if(Model.Type == "Lifestyle"){<text> active </text>}">
-                        <input type="radio" name="series" value="Lifestyle" autocomplete="off" @if(Model.Type == "Lifestyle"){<text> checked </text>}> Lifestyle
+                        <input type="radio" name="series" value="Lifestyle" autocomplete="off" @if (Model.Type == "Lifestyle") { <text> checked </text> }> Lifestyle
                     </label>
                     <label class="btn btn-default @if(Model.Type == "Quote"){<text> active </text>}">
-                        <input type="radio" name="series" value="Quote" autocomplete="off" @if(Model.Type == "Quote"){<text> checked </text>}> Quote
+                        <input type="radio" name="series" value="Quote" autocomplete="off" @if (Model.Type == "Quote") { <text> checked </text> }> Quote
                     </label>
                     <label class="btn btn-default @if(Model.Type == "FPP"){<text> active </text>}">
-                        <input type="radio" name="series" value="FPP" autocomplete="off" @if(Model.Type == "FPP"){<text> checked </text>}> FPP
+                        <input type="radio" name="series" value="FPP" autocomplete="off" @if (Model.Type == "FPP") { <text> checked </text> }> FPP
                     </label>
                 </div>
             </div>
@@ -54,8 +54,6 @@
                 <textarea class="form-control" id="description" name="description" rows="3" value="@Model.Description"></textarea>
             </div>
             <input type="hidden" value="@Model.Id" name="Id" id="Id" />
-        </form>
-        <form action="~/Admin/UploadPhoto" id="photo-upload" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="pictures">Upload/Delete Pictures</label>
                 <ul id="thumb-container">
@@ -65,10 +63,16 @@
                             <a href="#" class="pic-delete"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
                             <a href="@pic">
                                 <img class="thumbnail" src="@pic" />
+                                <input type="checkbox" name="sources" value="@pic" class="hidden" checked />
                             </a>
                         </li>
                     }
                 </ul>
+            </div>
+        </form>
+
+        <form action="~/Admin/UploadPhoto" id="photo-upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
                 <input type="file" name="images" id="pictures" multiple>
                 <input type="hidden" value="@Model.Id" name="id" id="id" />
             </div>

@@ -37,7 +37,9 @@ img, .shirtModal, .separator{
 .shirtModal .shirtContent{
     box-shadow: none;
     border: none;
+    background-color: #eee;
 }
+
 .nav li a{
     font-weight: bold;
 } 
@@ -65,12 +67,20 @@ a.modal-link:hover{
     display: inline;
 }
 .modal-pic{
-    text-align: center;
-    width: 200px;
-    height: 200px;
+    top: 0;
+    left: 0;
+    position:absolute;
+    max-width: 200px;
+    max-height: 200px;
     border-radius:10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.back-pic{
+    display:none;
 }
 .modal-body{
+    text-align: center;
     padding: 0px;
     width: 200px;
     height: 200px;
@@ -83,6 +93,10 @@ a.modal-link:hover{
     width: 50px;
     height: 50px;
     display: inline;
+}
+.lg-thumbnail{
+    height:550px;
+    width:850px;
 }
 #navbar{
     border-bottom-width: 1px;
@@ -165,7 +179,9 @@ a.modal-link:hover{
     width:100%;
 }
 #size-selector{
-    margin-top: 10px;
+    float:right;
+    width:75%;
+    display: inline;
 }
 #series-carousel{
     height:550px;
@@ -188,7 +204,8 @@ a.modal-link:hover{
       -webkit-transform: scale(1.01);
 }
 #shirt-carousel{
-    width:100%;
+    width:95%;
+    max-height: 800px;
 }
 #description-text{
     padding-left: 25px;
@@ -225,6 +242,14 @@ a.modal-link:hover{
 .newseries-container{
     display: none;
 }
+
+.sliderinput, .slidersubmit{
+    margin-top: 10px;
+}
+div.panel-collapse > div.panel-body{
+    padding-left: 0px;
+}
+
 
 @media only screen 
 and (min-device-width : 320px)

@@ -11,16 +11,10 @@
                         <div class="shirtModal modal-dialog" data-type="@Model.ElementAt(j).Type.ToString().ToLower()">
                             <div class="modal-content shirtContent">
                                 <!-- dialog body -->
-                                @if (@Model.ElementAt(j).Photos.Length > 0)
-                                {
-                                    <div class="modal-body" style="background:url(@Model.ElementAt(j).Photos.First()) no-repeat center center; background-size: 200px 200px"></div>
-                                }
-                                else
-                                {
-                                    <div class="modal-body">
-                                        <img class="modal-pic" alt="@Model.ElementAt(j).Handle" src="null" />
-                                    </div>
-                                }
+                                <div class="modal-body">
+                                    <img class="modal-pic front-pic" src="@Model.ElementAt(j).Photos.First()" />
+                                    <img class="modal-pic back-pic" src="@Model.ElementAt(j).Photos.ElementAt(1)" />
+                                </div>
                                 <!-- dialog buttons -->
                                 <div class="modal-footer">
                                     <h2 class="modal-title">@Model.ElementAt(j).Title</h2>

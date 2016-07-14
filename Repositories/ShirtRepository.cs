@@ -4,7 +4,6 @@ using System.Web;
 using ThrowdownAttire.Models;
 using ThrowdownAttire.ViewModels;
 using MongoDB.Bson;
-using System.Threading.Tasks;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using ThrowdownAttire.App_Start;
@@ -76,11 +75,11 @@ namespace ThrowdownAttire.Repositories
             var urls = new List<string>();
 
             int numPhotos = Globals.Shirts.Exists(x => x.Title == title && x.Photos.Length > 0) ? 
-                int.Parse(Globals.Shirts.FirstOrDefault(x => x.Title == title).Photos.Last().Split('_').Last().Replace(".jpg", "")) + 1 : 0;
+                int.Parse(Globals.Shirts.FirstOrDefault(x => x.Title == title).Photos.Last().Split('_').Last().Replace(".png", "")) + 1 : 0;
 
-            for (int i = numPhotos; i < images.Count(); i++)
+            for (int i = numPhotos; i < images.Count() + numPhotos; i++)
             {
-                var image = images[i];
+                var image = images[i - numPhotos];
 
                 //var memoryStream = new MemoryStream();
                 //image.InputStream.CopyTo(memoryStream);
@@ -102,12 +101,15 @@ namespace ThrowdownAttire.Repositories
 
         public BsonDocument UpdateShirt(ShirtEditViewModel model)
         {
+            var images = new BsonArray(model.sources);
+
             var filter = new BsonDocument("id", new ObjectId(model.Id));
             var update = Builders<BsonDocument>.Update
                 .Set("title", model.title)
                 .Set("type", model.series)
                 .Set("handle", model.title.ToLower().Replace(' ', '-'))
                 .Set("price", model.price)
+                .Set("images", images)
                 .Set("description", model.description ?? model.series);
             var options = new FindOneAndUpdateOptions<BsonDocument>
             {
@@ -144,10 +146,17 @@ namespace ThrowdownAttire.Repositories
             });
         }
 
-        public void deleteShirt(string id)
+        public Shirt deleteShirt(string id)
         {
+            var shirt = FindShirtById(id);
+            foreach(var photo in shirt.Photos)
+            {
+                deleteImage(photo.Split('/').Last().Replace(".png", ""));
+            }
+
             var filter = new BsonDocument("id", new ObjectId(id));
             collection.DeleteOneAsync(filter).Wait();
+            return FindShirtById(id);
         }
 
         public void UpdateShirt(Shirt shirt)
@@ -181,6 +190,22 @@ namespace ThrowdownAttire.Repositories
             };
 
             return shirt;
+        }
+
+        public string updateSeriesImage(string series, HttpPostedFileBase image)
+        {
+            deleteImage(series);
+            return uploadSeriesImage(series, image);
+        }
+
+        public Shirt firstShirtOfType(string type)
+        {
+            return Globals.Shirts.FirstOrDefault(x => x.Type == type);
+        }
+
+        public Shirt firstDisplayedShirtOfType(string type)
+        {
+            return Globals.Shirts.FirstOrDefault(x => x.Type == type && x.Display);
         }
         
         private Cloudinary getCloudinary()

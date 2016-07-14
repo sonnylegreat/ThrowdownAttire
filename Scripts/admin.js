@@ -27,4 +27,43 @@
             });
         }
     });
+
+    $(".sliderform").submit(function (e) {
+        e.preventDefault();
+
+        var formData = new FormData();
+        var $this = $(this);
+        var type = $this.data("type");
+
+        formData.append("type", type);
+        formData.append("image", $this.find("input")[0].files[0]);
+
+        var $btn = $($this.find("button").first())
+        $btn.button("loading");
+
+        $.ajax({
+            url: '/Admin/UpdateSlider',
+            type: 'Post',
+            beforeSend: function () { },
+            success: function (result) {
+                var src = result.src;
+                $("#" + type).attr("src", src);
+
+                $this[0].reset();
+                $btn.button("reset");
+            },
+            xhr: function () {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
+                    // Progress code if you want
+                }
+                return myXhr;
+            },
+            error: function () { },
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
 });

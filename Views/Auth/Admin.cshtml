@@ -13,6 +13,7 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#create" aria-controls="create" role="tab" data-toggle="tab">Create</a></li>
                 <li role="presentation"><a href="#select" aria-controls="select" role="tab" data-toggle="tab">Select</a></li>
+                <li role="presentation"><a href="#slider" aria-controls="slider" role="tab" data-toggle="tab">Slider</a></li>
             </ul>
 
 
@@ -59,7 +60,7 @@
                             <a href="#" id="add-series" class="inline"><span class="glyphicon glyphicon-plus-sign"></span></a>
                         </div>
                         <div class="newseries-container form-group">
-                            <label for="title">New Series</label>
+                            <label for="newseries">New Series</label>
                             <input type="text" name="newseries" class="form-control" id="newseries" placeholder="Series">
                         </div>
                         <div class="form-group newseries-container">
@@ -129,7 +130,39 @@
                         </table>
                     </div>
                 </div>
+                <div role="tabpanel" class="tab-pane" id="slider">
+                    <h2>Slider</h2>
+                    <div class="panel-group" id="slider-accordion" role="tablist" aria-multiselectable="true">
+                            @for (int i = 0; i < Globals.Types.Keys.Count; i++)
+                            {
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="heading_@i">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#slider-accordion" href="#collapse_@i" aria-expanded="true" aria-controls="collapse_@i">
+                                                    @Globals.Types.Keys.ElementAt(i)
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse_@i" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@i">
+                                            <div class="panel-body">
+                                                <form id="sliderform_@i" data-type="@Globals.Types.Keys.ElementAt(i)" class="sliderform">
+                                                    <div class="form-group">
+                                                        <a href="@Globals.Types[Globals.Types.Keys.ElementAt(i)]">
+                                                            <img class="lg-thumbnail" id="@Globals.Types.Keys.ElementAt(i)" src="@Globals.Types[Globals.Types.Keys.ElementAt(i)]" />
+                                                        </a>
+                                                        <input type="file" class="sliderinput" name="type_@i" id="type_@i">
+                                                        <button type="submit" data-loading-text="Saving..." class="btn btn-default slidersubmit">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
+                    </div>       
+                </div>
+
             </div>
+
         </div>
     </div>
 </div>

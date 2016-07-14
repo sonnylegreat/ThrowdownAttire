@@ -43,8 +43,8 @@ namespace ThrowdownAttire
                     Handle = "baked-as-cunt",
                     Photos = new string[] 
                     {
-                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195447/baked_as_cunt.jpg",
-                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195447/baked_as_cunt_2.jpg"
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195447/baked_as_cunt.png",
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195447/baked_as_cunt_2.png"
                     },
                     Price = 29.99,
                     Type = "Drugs",
@@ -66,10 +66,10 @@ namespace ThrowdownAttire
                     Handle = "bond-st",
                     Photos = new string[] 
                     {
-                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st.jpg",
-                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_2.jpg",
-                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_3.jpg",
-                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_4.jpg"
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st.png",
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_2.png",
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_3.png",
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/v1449195438/bond_st_4.png"
                     },
                     Price = 29.99,
                     Type = "FPP",
@@ -97,7 +97,7 @@ namespace ThrowdownAttire
                 if (!Globals.Types.Keys.Contains(shirt.Type) || (Globals.Types[shirt.Type] == null && shirt.Display == true))
                 {
                     var url = shirt.Display ? 
-                        "http://res.cloudinary.com/throw-down-attire/image/upload/" + shirt.Type + ".jpg" : null;
+                        "http://res.cloudinary.com/throw-down-attire/image/upload/" + shirt.Type + ".png" : null;
                     Globals.Types.Add(shirt.Type, url);
                 }
 

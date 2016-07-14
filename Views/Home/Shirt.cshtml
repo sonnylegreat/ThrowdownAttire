@@ -9,7 +9,17 @@
     <div class="row">
         <div id="info" class="col-md-offset-1 col-md-5">
             <div id="header">
-                <div id="shirt-header"><h1>@Model.Title -</h1> <h3>$@Model.Price.ToString("0.00")</h3></div>
+                <div id="shirt-header">
+                    <div id="header-info"><h1>@Model.Title -</h1> <h3>$@Model.Price.ToString("0.00")</h3></div>
+                    <select id="size-selector" class="form-control">
+                        @foreach (var size in Model.Variants)
+                        {
+                            <option value="@size.Value">
+                                @size.Key
+                            </option>
+                        }
+                    </select>
+                </div>
             </div>
 
             <!-- Nav tabs -->
@@ -37,14 +47,6 @@
                 <div role="tabpanel" class="tab-pane" id="sizing">
                     <div class="details-container">
                         <img src="~/Content/sizing.png" id="sizing-chart" />
-                        <select id="size-selector" class="form-control">
-                            @foreach (var size in Model.Variants)
-                            {
-                                <option value="@size.Value">
-                                    @size.Key
-                                </option>
-                            }
-                        </select>
                     </div>
                 </div>
             </div>
@@ -60,12 +62,12 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     @for (int i = 0; i < Model.Photos.Length; i++)
-                    {
-                        <a href="#" class="modal-trigger" data-toggle="modal" data-target=".bs-example-modal-lg">
+                        {
                             <div class="item @if(i == 0) {<text> active</text>}">
-                                <img src=@Model.Photos[i] id="photo-@i" />
+                                <a href="#" class="modal-trigger" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                    <img src=@Model.Photos[i] id="photo-@i" />
+                                </a>
                             </div>
-                        </a>
                     }
                 </div>
                 <a class="left carousel-control" href="#shirt-carousel" role="button" data-slide="prev">

@@ -36,6 +36,7 @@ namespace ThrowdownAttire.ViewModels
         public string title { get; set; }
         public string series { get; set; }
         public double price { get; set; }
+        public string[] sources { get; set; }
         public string description { get; set; }
     }
 }

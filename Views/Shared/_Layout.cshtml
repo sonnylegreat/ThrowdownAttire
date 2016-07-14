@@ -23,13 +23,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="~/Series">
                     <h2 id="shopname">Throw Down Attire</h2>
                 </a>
             </div>
             <div class="navbar-collapse collapse" id="throwdown-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="series" value="series"><a href="~/Series">Series</a></li>
                     @foreach (var type in Globals.Types.Keys)
                     {
                         if (Globals.Types[type] != null)
