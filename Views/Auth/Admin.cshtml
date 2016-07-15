@@ -8,7 +8,7 @@
 
 <div id="addpage">
     <div class="row">
-        <div class="col-lg-offset-3 col-lg-6">
+        <div class="col-lg-offset-2 col-lg-7">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#create" aria-controls="create" role="tab" data-toggle="tab">Create</a></li>
@@ -100,12 +100,13 @@
                         <table id="admin-table" class="table table-bordered tablesorter">
                             <thead>
                                 <tr>
-                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Title</th>
-                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Type</th>
-                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Price</th>
-                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Stock</th>
-                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Images</th>
-                                    <th><span class="glyphicon glyphicon-chevron-up"></span>Display</th>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Images</th>
+                                    <th>Snip Cart Variants</th>
+                                    <th>Display</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -120,6 +121,19 @@
                                             @foreach (var pic in shirt.Photos)
                                             {
                                                 <a href="@pic"><img class="thumbnail" src="@pic" /></a>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var variant in shirt.Variants)
+                                            {
+                                                if(variant.Key == "XL")
+                                                {
+                                                    <p>@variant.Value</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>@variant.Value, </p>
+                                                }
                                             }
                                         </td>
                                         <td><input data-id="@shirt.Id" type="checkbox" class="display-check" value="@shirt.Display.ToString()" @if (shirt.Display) { <text> checked</text>} /></td>

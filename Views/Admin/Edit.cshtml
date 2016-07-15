@@ -1,4 +1,5 @@
 ﻿@model ThrowdownAttire.Models.Shirt
+@using ThrowdownAttire.App_Start
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,18 +29,12 @@
             <div class="form-group">
                 <label style="display:block" for="type">Series</label>
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default @if(Model.Type == "Drugs"){<text> active </text>}">
-                        <input type="radio" name="series" value="Drugs" autocomplete="off" @if (Model.Type == "Drugs") { <text> checked </text> }> Drugs
-                    </label>
-                    <label class="btn btn-default @if(Model.Type == "Lifestyle"){<text> active </text>}">
-                        <input type="radio" name="series" value="Lifestyle" autocomplete="off" @if (Model.Type == "Lifestyle") { <text> checked </text> }> Lifestyle
-                    </label>
-                    <label class="btn btn-default @if(Model.Type == "Quote"){<text> active </text>}">
-                        <input type="radio" name="series" value="Quote" autocomplete="off" @if (Model.Type == "Quote") { <text> checked </text> }> Quote
-                    </label>
-                    <label class="btn btn-default @if(Model.Type == "FPP"){<text> active </text>}">
-                        <input type="radio" name="series" value="FPP" autocomplete="off" @if (Model.Type == "FPP") { <text> checked </text> }> FPP
-                    </label>
+                    @foreach (var type in Globals.Types.Keys)
+                    {
+                        <label class="btn btn-default @if (Model.Type == type) {<text>active</text>}">
+                            <input type="radio" name="series" value="@type" autocomplete="off" @if (Model.Type == type) {<text>checked</text>} />@type
+                        </label>
+                    }
                 </div>
             </div>
             <div class="form-group">

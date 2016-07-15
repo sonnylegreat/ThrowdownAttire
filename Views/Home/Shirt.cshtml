@@ -54,12 +54,6 @@
 
         <div class="col-md-5">
             <div id="shirt-carousel" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    @for (int i = 0; i < Model.Photos.Length; i++)
-                    {
-                        <li data-target="#shirt-carousel" data-slide-to="@i" @if(i == 0) {<text>class="active"</text>}></li>
-                    }
-                </ol>
                 <div class="carousel-inner" role="listbox">
                     @for (int i = 0; i < Model.Photos.Length; i++)
                         {
@@ -79,15 +73,21 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            <button id="buybutton" class="btn btn-lg snipcart-add-item inline"
-                    data-item-image="@Model.Photos.First()"
-                    data-item-id="@Model.Variants["XS"]"
-                    data-item-name="@Model.Title - XS"
-                    data-item-price="29.99"
-                    data-item-url="@Request.Url.ToString().Replace("http://localhost:64317", "http://faccedb6.ngrok.io").Replace("Shirt/" + Model.Id, "Variant/" + Model.Variants["XS"].ToString())"
-                    data-item-weight="200">
-                Add to Cart
-            </button>
+            <div id="button-container">
+                <button id="buybutton" class="btn btn-lg snipcart-add-item"
+                        data-item-image="@Model.Photos.First()"
+                        data-item-id="@Model.Variants["XS"]"
+                        data-item-name="@Model.Title - XS"
+                        data-item-price="29.99"
+                        data-item-url="@Request.Url.ToString().Replace("http://localhost:64317", "http://faccedb6.ngrok.io").Replace("Shirt/" + Model.Id, "Variant/" + Model.Variants["XS"].ToString())"
+                        data-item-weight="200"
+                        data-item-width="15"
+                        data-item-height="3"
+                        data-item-length="30">
+                    Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
+                </button>
+                <button class="btn btn-lg btn-primary btn-after-add snipcart-checkout" id="open-cart">Checkout <span class="glyphicon glyphicon-check"></span></button>
+            </div>
         </div>
     </div>
 </div>

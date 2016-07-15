@@ -13,6 +13,15 @@ div.panel-default > div.panel-collapse > div.faq-body{
     display:block;
     margin-top: 10px;
 }
+.faqsubmit{
+    margin: auto;
+}
+#open-cart{
+    display: none;
+}
+div.shirt-row{
+    margin:0px;
+}
 h1, h2, h3, #size-selector > option, #size-selector{
     font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
 }
@@ -21,6 +30,9 @@ h1, h2, h3, #size-selector > option, #size-selector{
     font-size: 25px;
     line-height:1em;
     font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
+}
+#faqs{
+    text-align:center;
 }
 .navbar-nav li a img{
     width: 25px;

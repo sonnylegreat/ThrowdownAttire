@@ -20,4 +20,10 @@
         var pic = $(this).find("img").first().attr("src");
         $("#modal-pic").attr("src", pic);
     });
+
+    $("#buybutton").click(function () {
+        $(this).css({ "width": "50%", "float": "left" });
+        $(this).html("Add another? <span class='glyphicon glyphicon-shopping-cart'></span>");
+        $(".btn-after-add").show().css({ "width": "50%", "float": "left", "display":"table-cell" });
+    });
 });
