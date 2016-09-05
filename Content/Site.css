@@ -9,11 +9,17 @@ div.panel-default > div.panel-collapse > div.faq-body{
     padding: 10px;
     font-size: 16px;
 }
-.faqsubmit, #faq-add{
-    display:block;
-    margin-top: 10px;
+.faqsubmit, .faq-add, #category-add{
+    margin-top: 20px;
+}
+.faq-add, #category-add{
+    margin-left: 10px;
+}
+.category-container{
+    margin-top: 20px;
 }
 .faqsubmit{
+    display: block;
     margin: auto;
 }
 #open-cart{
@@ -73,7 +79,7 @@ img, .shirtModal, .separator{
     padding-right: 5px;
     text-align: center;
 }
-.modal-title{
+.modal-title, .category{
     font-family: "Dripping Marker", "Segoe Script", "AR DECODE", Vijaya, Arial;
 }
 a.modal-link{
@@ -117,6 +123,16 @@ a.modal-link:hover{
 .lg-thumbnail{
     height:550px;
     width:850px;
+}
+.glyphicon-trash{
+    color:red;
+}
+.category{
+    text-align: center;
+    font-size: 25px;
+    border: none;
+    background-color: inherit;
+
 }
 #navbar{
     border-bottom-width: 1px;

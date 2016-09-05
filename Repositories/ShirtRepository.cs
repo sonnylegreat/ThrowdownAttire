@@ -16,12 +16,14 @@ namespace ThrowdownAttire.Repositories
     public class ShirtRepository
     {
         public IMongoCollection<BsonDocument> collection;
+        public IMongoCollection<BsonDocument> FAQCollection;
         private IMongoDatabase db;
 
         public ShirtRepository()
         {
             db = new DBContext().GetDatabase();
             collection = db.GetCollection<BsonDocument>("Shirts");
+            FAQCollection = db.GetCollection<BsonDocument>("FAQs");
         }
 
         public Shirt Create(ShirtCreateViewModel model)
@@ -119,6 +121,16 @@ namespace ThrowdownAttire.Repositories
             return collection.FindOneAndUpdateAsync(filter, update, options).Result;
         }
 
+        public void createFAQFromBson(BsonDocument doc)
+        {
+            Globals.FAQs.Add(new FAQ()
+            {
+                Category = doc["category"].AsString,
+                Questions = doc["questions"].AsBsonArray.Select(x => x.ToString()).ToList(),
+                Answers = doc["answers"].AsBsonArray.Select(x => x.ToString()).ToList()
+            });
+        }
+
         public BsonDocument UpdateShirt(string id, string field, string value)
         {
             var filter = new BsonDocument("id", new ObjectId(id));
@@ -209,35 +221,53 @@ namespace ThrowdownAttire.Repositories
             return Globals.Shirts.FirstOrDefault(x => x.Type == type && x.Display);
         }
 
+        public void deleteFAQ(FAQ faq, int q)
+        {
+            var filter = new BsonDocument("category", faq.Category);
+            var update = Builders<BsonDocument>.Update
+                .Set("questions", new BsonArray(faq.Questions))
+                .Set("answers", new BsonArray(faq.Answers));
+            FAQCollection.FindOneAndUpdateAsync(filter, update);
+        }
+
+        public void deleteCategory(FAQ faq)
+        {
+            var filter = new BsonDocument("category", faq.Category);
+            FAQCollection.DeleteOneAsync(filter);
+        }
+
         public void saveFAQs()
         {
-            var FAQcollection = getFAQs();
-            FAQcollection.DeleteManyAsync(new BsonDocument()).Wait();
+            FAQCollection.DeleteManyAsync(new BsonDocument()).Wait();
 
             var newFAQs = new List<BsonDocument>();
 
-            for(int i = 0; i < Globals.FAQs.Keys.Count; i++)
+            for(int i = 0; i < Globals.FAQs.Count; i++)
             {
+                var questions = new BsonArray();
+                var answers = new BsonArray();
+
+                for(int j = 0; j < Globals.FAQs.ElementAt(i).Questions.Count; j++)
+                {
+                    questions.Add(Globals.FAQs.ElementAt(i).Questions.ElementAt(j));
+                    answers.Add(Globals.FAQs.ElementAt(i).Answers.ElementAt(j));
+                }
+
                 newFAQs.Add(new BsonDocument()
                 {
-                    {"question", Globals.FAQs.Keys.ElementAt(i) },
-                    {"answer", Globals.FAQs.Values.ElementAt(i) }
+                    {"category", Globals.FAQs.ElementAt(i).Category },
+                    {"questions", questions },
+                    {"answers", answers }
                 });
             }
 
-            FAQcollection.InsertManyAsync(newFAQs).Wait();
+            FAQCollection.InsertManyAsync(newFAQs).Wait();
         }
 
         private Cloudinary getCloudinary()
         {
             var account = new Account(Globals.CloudinaryName, Globals.CloudinaryAPIKey, Globals.CloudinarySecret);
             return new Cloudinary(account);
-        }
-
-        /**FAQ stuff*/
-        public IMongoCollection<BsonDocument> getFAQs()
-        {
-            return db.GetCollection<BsonDocument>("FAQs");
         }
     }
 }

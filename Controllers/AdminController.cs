@@ -8,6 +8,8 @@ using ThrowdownAttire.ViewModels;
 using ThrowdownAttire.Repositories;
 using System.Web.Routing;
 using System.Collections.Generic;
+using ThrowdownAttire.Models;
+using Newtonsoft.Json.Linq;
 
 namespace ThrowdownAttire.Controllers
 {
@@ -217,10 +219,64 @@ namespace ThrowdownAttire.Controllers
 
             var repo = new ShirtRepository();
 
-            var faqs = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            var jObject = JObject.Parse(json);
+            var faqs = new List<FAQ>();
+
+            foreach(var faq in jObject["faqs"])
+            {
+                faqs.Add(new FAQ()
+                {
+                    Category = (string) faq["category"],
+                    Questions = faq["questions"].ToObject<List<string>>(),
+                    Answers = faq["answers"].ToObject<List<string>>()
+                });
+            }
+            
             Globals.FAQs = faqs;
 
-            repo.saveFAQs();
+            try
+            {
+                repo.saveFAQs();
+            }
+            catch(Exception e)
+            {
+                Globals.FAQs = new List<FAQ>();
+            }
+
+            return RedirectToAction("Admin", "Auth");
+        }
+
+        public ActionResult DeleteFAQ(int cat, int q)
+        {
+            if (!Authenticated())
+            {
+                return RedirectToAction("AdminLogin", "Auth");
+            }
+
+            var repo = new ShirtRepository();
+            var faq = Globals.FAQs.ElementAt(cat);
+
+            faq.Questions.Remove(faq.Questions.ElementAt(q));
+            faq.Answers.Remove(faq.Answers.ElementAt(q));
+
+            repo.deleteFAQ(faq, q);
+
+            return RedirectToAction("Admin", "Auth");
+        }
+
+        public ActionResult DeleteCategory(int cat)
+        {
+            if (!Authenticated())
+            {
+                return RedirectToAction("AdminLogin", "Auth");
+            }
+
+            var repo = new ShirtRepository();
+            var faq = Globals.FAQs.ElementAt(cat);
+
+            repo.deleteCategory(faq);
+
+            Globals.FAQs.Remove(faq);
 
             return RedirectToAction("Admin", "Auth");
         }

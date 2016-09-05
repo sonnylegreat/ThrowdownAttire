@@ -177,34 +177,71 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="faqs">
-                    <h2>Slider</h2>
+                    <h2>FAQs</h2>
                     <div class="panel-group" id="faqs-accordion" role="tablist" aria-multiselectable="true">
                         <form id="faq-form" class="form-inline" action="../../Admin/FAQ" method="post" enctype="multipart/form-data">
-                            @for (int i = 0; i < Globals.FAQs.Keys.Count; i++)
+                            @for (int i = 0; i < Globals.FAQs.Count; i++)
                             {
-                                <div class="faq-container">
+                                <div class="category-container" data-cnum="@i">
                                     <div class="form-group">
-                                        <label for="q_@i">Question</label>
-                                        <input type="text" value="@Globals.FAQs.Keys.ElementAt(i)" id="q_@i" name="q_@i" class="form-control question" />
-                                </div>
-                                    <div class="form-group">
-                                        <label for="a_@i">Answer</label>
-                                        <input type="text" value="@Globals.FAQs.ElementAt(i).Value" id="a_@i" name="a_@i" class="form-control answer" />
+                                        <input type="text" id="category_@i" class="category" value="@Globals.FAQs.ElementAt(i).Category" />
                                     </div>
+                                    <div class="form-group">
+                                        <a href="#" data-key="@i" class="category-delete">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </div>
+                                    @for (int j = 0; j < Globals.FAQs.ElementAt(i).Questions.Count; j++)
+                                    {
+                                        <div class="faq-container">
+                                            <div class="form-group">
+                                                <label for="q_@(i + "_" + j)">Question</label>
+                                                <input type="text"
+                                                        value="@Globals.FAQs.ElementAt(i).Questions.ElementAt(j)"
+                                                        id="q_@(i + "_" + j)" name="q_@(i + "_" + j)" class="form-control question" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="a_@(i + "_" + j)">Answer</label>
+                                                <input type="text" value="@Globals.FAQs.ElementAt(i).Answers.ElementAt(j)" id="a_@(i + "_" + j)" name="a_@(i + "_" + j)" class="form-control answer" />
+                                            </div>
+                                            <div class="form-group">
+                                                <a href="#" data-key="@(i + "_" + j)" class="faq-delete">
+                                                    <span class="glyphicon glyphicon-trash" style="margin-top: 27px;"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="faq-container faq-create" data-qnum="Globals.FAQs.ElementAt(i).Questions.Count">
+                                        <div class="form-group">
+                                            <label for="q_@(i + "_" + Globals.FAQs.ElementAt(i).Questions.Count)">Question</label>
+                                            <input type="text" placeholder="Question" id="q_@(i + "_" + Globals.FAQs.ElementAt(i).Questions.Count)" name="q_@(i + "_" + Globals.FAQs.ElementAt(i).Questions.Count)" class="form-control question" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="a_@(i + "_" + Globals.FAQs.ElementAt(i).Questions.Count)">Answer</label>
+                                            <input type="text" placeholder="Answer" id="a_@(i + "_" + Globals.FAQs.ElementAt(i).Questions.Count)" name="a_@(i + "_" + Globals.FAQs.ElementAt(i).Questions.Count)" class="form-control answer" />
+                                        </div>
+                                    </div>
+                                    <a href="#" class="faq-add"><span class="glyphicon glyphicon-plus-sign">Add FAQ</span></a>
                                 </div>
                             }
-                            <div class="faq-container faq-create">
+                            <div class="category-container" data-cnum="@Globals.FAQs.Count">
                                 <div class="form-group">
-                                    <label for="q_@Globals.FAQs.Keys.Count">Question</label>
-                                    <input type="text" placeholder="Question" id="q_@Globals.FAQs.Keys.Count" name="q_@Globals.FAQs.Keys.Count" class="form-control question" />
+                                    <input type="text" id="category_@Globals.FAQs.Count" class="category" value="Category @Globals.FAQs.Count" />
                                 </div>
-                                <div class="form-group">
-                                    <label for="a_@Globals.FAQs.Keys.Count">Answer</label>
-                                    <input type="text" placeholder="Answer" id="a_@Globals.FAQs.Keys.Count" name="a_@Globals.FAQs.Keys.Count" class="form-control answer" />
+                                <div class="faq-container faq-create" data-qnum="0">
+                                    <div class="form-group">
+                                        <label for="q_@(Globals.FAQs.Count + "_0")">Question</label>
+                                        <input type="text" placeholder="Question" id="q_@(Globals.FAQs.Count + "_0")" name="q_@(Globals.FAQs.Count + "_0")" class="form-control question" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="a_@(Globals.FAQs.Count + "_0")">Answer</label>
+                                        <input type="text" placeholder="Answer" id="a_@(Globals.FAQs.Count + "_0")" name="a_@(Globals.FAQs.Count + "_0")" class="form-control answer" />
+                                    </div>
                                 </div>
+                                <a href="#" class="faq-add"><span class="glyphicon glyphicon-plus-sign">Add FAQ</span></a>
                             </div>
-                            <a href="#" id="faq-add"><span class="glyphicon glyphicon-plus-sign">Add FAQ</span></a>
-                            <button type="submit" data-loading-text="Saving..." class="btn btn-default faqsubmit">Save</button> 
+                            <a href="#" id="category-add"><span class="glyphicon glyphicon-plus-sign">Add Category</span></a>
+                            <button type="submit" data-loading-text="Saving..." class="btn btn-default faqsubmit">Save</button>
                         </form>
                     </div>
                 </div>
