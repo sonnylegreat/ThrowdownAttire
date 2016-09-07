@@ -22,6 +22,10 @@ div.panel-default > div.panel-collapse > div.faq-body{
     display: block;
     margin: auto;
 }
+.panel-title h3{
+    padding: 0px;
+    margin: 0px;
+}
 #open-cart{
     display: none;
 }
